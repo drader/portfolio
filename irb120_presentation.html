@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABB IRB120 Robot Arm Simulation — Oğuz Gençer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '\\(', right: '\\)', display: false}
+    ],
+    throwOnError: false
+  });"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #fdfcf8;
+  --bg2:     #f5f2eb;
+  --bg3:     #ede9df;
+  --border:  #d8d0c4;
+  --text:    #1c1917;
+  --dim:     #57534e;
+  --dimmer:  #a8a29e;
+  --accent:  #c2410c;
+  --accent2: #1d4ed8;
+  --mono:    #6d28d9;
+  --green:   #15803d;
+  --radius:  3px;
+  --max-w:   960px;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: 16px;
+  line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253,252,248,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-back { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--dim); transition: color 0.15s; }
+.nav-back:hover { color: var(--text); }
+.nav-badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); background: #fff1ee; border: 1px solid #fbd0c1;
+  padding: 2px 9px; border-radius: 2px;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 108px 0 64px;
+  border-bottom: 2px solid var(--text);
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 60px, transparent 60px, transparent 64px);
+}
+.hero-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
+}
+.hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+.hero-title {
+  font-size: clamp(30px, 5.5vw, 52px); font-weight: 800;
+  letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 18px;
+}
+.hero-subtitle {
+  font-size: 17px; color: var(--dim); line-height: 1.75;
+  max-width: 600px; margin-bottom: 36px;
+}
+.hero-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0; border: 1px solid var(--border); margin-bottom: 28px;
+  background: var(--bg2);
+}
+.hero-meta-item { padding: 14px 18px; border-right: 1px solid var(--border); }
+.hero-meta-item:last-child { border-right: none; }
+.meta-lbl {
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--dimmer);
+  margin-bottom: 4px;
+}
+.meta-val { font-size: 13px; font-weight: 600; color: var(--text); }
+.meta-val.done { color: var(--green); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  padding: 3px 9px; border: 1px solid var(--border);
+  color: var(--dim); background: var(--bg3);
+}
+
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; font-size: 13.5px; font-weight: 600;
+  cursor: pointer; border: none; transition: all 0.15s; font-family: 'Inter', sans-serif;
+}
+.btn-primary { background: var(--text); color: var(--bg); }
+.btn-primary:hover { background: var(--accent); }
+.btn-outline { background: transparent; color: var(--dim); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--text); color: var(--text); }
+
+/* ── SECTIONS ── */
+section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+.sec-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 10px;
+}
+.sec-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.sec-title {
+  font-size: clamp(22px, 3vw, 30px); font-weight: 800;
+  letter-spacing: -0.03em; margin-bottom: 24px;
+}
+.prose { max-width: 720px; }
+.prose p { font-size: 15.5px; color: var(--dim); line-height: 1.82; margin-bottom: 16px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose em { color: var(--dim); }
+.prose code {
+  font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+  color: var(--mono); background: #f3f0ff; padding: 1px 5px;
+}
+
+/* ── CALLOUT ── */
+.callout {
+  border-left: 3px solid var(--accent); background: var(--bg2);
+  padding: 18px 22px; margin: 24px 0;
+}
+.callout p { font-size: 14.5px; color: var(--dim); line-height: 1.75; margin: 0; }
+.callout strong { color: var(--text); }
+
+/* ── MATH ── */
+.math-display {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 24px 28px; margin: 24px 0; overflow-x: auto;
+  border-radius: var(--radius);
+}
+.math-display .katex-display { margin: 0; }
+.math-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--dimmer);
+  margin-bottom: 12px;
+}
+.math-group { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── DH TABLE ── */
+.dh-table-wrap { overflow-x: auto; margin: 28px 0; }
+.dh-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.dh-table caption {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--dimmer);
+  text-align: left; padding-bottom: 10px; caption-side: top;
+}
+.dh-table th {
+  background: var(--text); color: var(--bg);
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; text-align: center; padding: 10px 16px; font-weight: 600;
+}
+.dh-table th:first-child { text-align: left; }
+.dh-table td {
+  padding: 10px 16px; border-bottom: 1px solid var(--border);
+  color: var(--dim); font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; text-align: center;
+}
+.dh-table td:first-child { color: var(--text); font-weight: 600; text-align: left; background: var(--bg2); }
+.dh-table tr:last-child td { border-bottom: none; }
+.dh-table tr:hover td { background: var(--bg3); }
+.dh-table tr:hover td:first-child { background: var(--bg3); }
+
+/* ── SPEC CARDS ── */
+.spec-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 24px 0;
+}
+.spec-card { background: var(--bg); padding: 16px 20px; }
+.spec-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dimmer); margin-bottom: 5px; }
+.spec-val { font-size: 15px; font-weight: 700; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+.spec-sub { font-size: 11.5px; color: var(--dim); margin-top: 3px; }
+
+/* ── STEPS ── */
+.steps { margin: 24px 0; display: flex; flex-direction: column; gap: 16px; }
+.step { display: flex; gap: 16px; align-items: flex-start; }
+.step-num {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: white;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
+}
+.step-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.step-desc { font-size: 14px; color: var(--dim); line-height: 1.7; }
+
+/* ── TWO-COL ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 24px; }
+
+/* ── MOSAIC (CSS columns — no cropping) ── */
+.mosaic {
+  columns: 3;
+  column-gap: 6px;
+  margin-top: 28px;
+}
+.mosaic-2 {
+  columns: 2;
+  column-gap: 6px;
+  margin-top: 28px;
+}
+.mosaic-item {
+  break-inside: avoid;
+  margin-bottom: 6px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.mosaic-item img {
+  width: 100%; height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.mosaic-item:hover img { transform: scale(1.02); }
+.mosaic-cap {
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  letter-spacing: 0.04em; color: var(--dimmer);
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+/* ── FOOTER ── */
+footer { padding: 32px 0; background: var(--text); color: var(--bg); }
+.footer-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer a { color: #fbd0c1; }
+footer p { font-size: 13px; color: #a8a29e; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .wrap { padding: 0 20px; }
+  .nav-inner { padding: 0 20px; }
+  .footer-inner { padding: 0 20px; flex-direction: column; gap: 8px; text-align: center; }
+  .hero { padding: 90px 0 48px; }
+  .hero-meta { grid-template-columns: 1fr 1fr; }
+  .hero-meta-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .mosaic { columns: 2; }
+  .mosaic-2 { columns: 1; }
+  .two-col { grid-template-columns: 1fr; gap: 24px; }
+  .math-display { padding: 16px; }
+}
+@media (max-width: 440px) {
+  .mosaic { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to portfolio
+    </a>
+    <span class="nav-badge">Graduation Project · 2014</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-label">Robotics · Control Systems · Simulation</div>
+    <h1 class="hero-title">ABB IRB120 Robot Arm<br>Modelling &amp; Simulation</h1>
+    <p class="hero-subtitle">
+      A complete mathematical model and dynamic simulation of the ABB IRB120 6-DOF
+      industrial robot arm — from DH parameter derivation through Lagrangian dynamics,
+      trajectory generation, and Simulink-based SimMechanics simulation.
+    </p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="meta-lbl">Type</div>
+        <div class="meta-val">Bachelor Thesis</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-lbl">Institution</div>
+        <div class="meta-val">Istanbul Aydın University</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-lbl">Advisor</div>
+        <div class="meta-val">Prof. Gökhan Erdemir</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-lbl">Date</div>
+        <div class="meta-val">June 2014</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-lbl">Status</div>
+        <div class="meta-val done">Completed</div>
+      </div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">Matlab</span>
+      <span class="tag">Simulink</span>
+      <span class="tag">ABB IRB120</span>
+      <span class="tag">6-DOF</span>
+      <span class="tag">Denavit–Hartenberg</span>
+      <span class="tag">Forward Kinematics</span>
+      <span class="tag">Inverse Kinematics</span>
+      <span class="tag">Lagrangian Dynamics</span>
+      <span class="tag">Trajectory Planning</span>
+      <span class="tag">SimMechanics</span>
+    </div>
+
+    <div class="btn-row">
+      <a href="https://github.com/drader/project-irb120" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repository
+      </a>
+      <a href="https://github.com/drader/project-irb120/raw/main/IRB120_project.pdf" target="_blank" rel="noopener" class="btn btn-outline">
+        Download Thesis (PDF)
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ABSTRACT -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">01 — Abstract</div>
+    <h2 class="sec-title">Project overview</h2>
+    <div class="two-col">
+      <div class="prose">
+        <p>
+          This project develops a <strong>full mathematical model and dynamic simulation</strong> of the
+          ABB IRB120 industrial robot arm in Matlab and Simulink. The application domain is a
+          <strong>painter robot</strong> — a task that demands high positional sensitivity and smooth,
+          repeatable trajectories along prescribed paths.
+        </p>
+        <p>
+          The ABB IRB120 was selected for its combination of structural stability and
+          operational mobility: a compact footprint, 600 mm reach, and 3 kg payload make it
+          well-suited to precision applications where agility matters more than raw payload.
+          CAD geometry and joint parameters were sourced directly from ABB's official datasheet and
+          STL files, ensuring the simulation matches the physical robot.
+        </p>
+        <p>
+          The model covers the full theoretical pipeline — from coordinate frame assignment
+          through Lagrangian dynamics — and is implemented as a closed-loop SimMechanics simulation
+          with joint-level PID control and polynomial trajectory references.
+        </p>
+      </div>
+      <div>
+        <div class="spec-grid">
+          <div class="spec-card">
+            <div class="spec-lbl">Robot model</div>
+            <div class="spec-val">ABB IRB120</div>
+            <div class="spec-sub">3/0.6 variant</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-lbl">Degrees of freedom</div>
+            <div class="spec-val">6</div>
+            <div class="spec-sub">All revolute joints</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-lbl">Robot type</div>
+            <div class="spec-val">Articulated</div>
+            <div class="spec-sub">RRR — elbow configuration</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-lbl">Application</div>
+            <div class="spec-val">Painter robot</div>
+            <div class="spec-sub">High-sensitivity drawing</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-lbl">ODE solver</div>
+            <div class="spec-val">ode45</div>
+            <div class="spec-sub">RelTol 1 × 10⁻³</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-lbl">Environment</div>
+            <div class="spec-val">R2014a</div>
+            <div class="spec-sub">Matlab + SimMechanics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROBOT TYPES -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">02 — Background</div>
+    <h2 class="sec-title">Manipulator classification</h2>
+    <div class="prose">
+      <p>
+        Robot manipulators are classified by the arrangement of their joints.
+        Three primary configurations exist in industrial robotics, each with distinct
+        kinematic and workspace properties:
+      </p>
+    </div>
+    <div class="spec-grid" style="margin: 20px 0 28px; grid-template-columns: repeat(3, 1fr);">
+      <div class="spec-card">
+        <div class="spec-lbl">Cartesian (PPP)</div>
+        <div class="spec-val" style="font-size: 13px; margin-top: 6px; font-family: Inter, sans-serif; font-weight: 500; color: var(--dim);">
+          Three prismatic joints. Rectangular workspace; high stiffness, simple kinematics, limited dexterity.
+        </div>
+      </div>
+      <div class="spec-card" style="border: 2px solid var(--accent);">
+        <div class="spec-lbl" style="color: var(--accent);">Articulated (RRR) ← selected</div>
+        <div class="spec-val" style="font-size: 13px; margin-top: 6px; font-family: Inter, sans-serif; font-weight: 500; color: var(--dim);">
+          Three revolute joints. Anthropomorphic structure; high dexterity and large reachable workspace. IRB120 uses this configuration.
+        </div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">SCARA (RRP)</div>
+        <div class="spec-val" style="font-size: 13px; margin-top: 6px; font-family: Inter, sans-serif; font-weight: 500; color: var(--dim);">
+          Two revolute, one prismatic. Optimised for planar assembly; cylindrical workspace, high horizontal speed.
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <p>
+        The <strong>articulated configuration</strong> was chosen because its anthropomorphic structure allows
+        the end-effector to approach a canvas from multiple orientations — critical for brush-stroke control.
+        The IRB120 adds three more revolute joints at the wrist (joints 4–6),
+        giving full 6-DOF control over both position and orientation of the tool frame.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 3D MODEL -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">03 — Mechanical Model</div>
+    <h2 class="sec-title">3D robot geometry</h2>
+    <div class="prose">
+      <p>
+        The CAD model was obtained from ABB's official file repository and imported into
+        Simulink's SimMechanics toolbox as STL geometry. Each link carries precise
+        <strong>mass and inertia tensors</strong> derived from the CAD data. Coordinate frames
+        are assigned at each joint following the DH convention.
+      </p>
+    </div>
+
+    <div class="mosaic">
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/mechanic_model_1.png" alt="Front view" loading="lazy">
+        <div class="mosaic-cap">Frontal view — zero configuration</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/mechanic_model_2.png" alt="Side view" loading="lazy">
+        <div class="mosaic-cap">Side view</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/mechanic_model_3.png" alt="Isometric view" loading="lazy">
+        <div class="mosaic-cap">Isometric — link frames</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulation_model_1.png" alt="Initial configuration" loading="lazy">
+        <div class="mosaic-cap">Simulation — initial configuration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DH PARAMETERS -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">04 — Kinematics</div>
+    <h2 class="sec-title">Denavit–Hartenberg parameters</h2>
+    <div class="prose">
+      <p>
+        The kinematic model is built using the <strong>Denavit–Hartenberg (DH) convention</strong>.
+        A coordinate frame is attached to each joint following a four-step procedure: align the
+        \(z\)-axis with the joint axis, define the common normal between consecutive \(z\)-axes,
+        and express four parameters — \(d\), \(\theta\), \(a\), \(\alpha\) — that uniquely describe
+        the transformation between adjacent frames.
+      </p>
+    </div>
+
+    <div class="dh-table-wrap">
+      <table class="dh-table">
+        <caption>Table 1 — DH parameters for the ABB IRB120</caption>
+        <thead>
+          <tr>
+            <th>Joint</th>
+            <th>\(d\) (mm)</th>
+            <th>\(\theta\) (variable)</th>
+            <th>\(a\) (mm)</th>
+            <th>\(\alpha\) (rad)</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 — Rotation (base)</td>
+            <td>290</td>
+            <td>\(\theta_1\)</td>
+            <td>0</td>
+            <td>\(-\pi/2\)</td>
+            <td>Base height 290 mm</td>
+          </tr>
+          <tr>
+            <td>2 — Lower arm</td>
+            <td>0</td>
+            <td>\(\theta_2 - \pi/2\)</td>
+            <td>270</td>
+            <td>\(0\)</td>
+            <td>Upper arm link 270 mm</td>
+          </tr>
+          <tr>
+            <td>3 — Elbow</td>
+            <td>0</td>
+            <td>\(\theta_3\)</td>
+            <td>70</td>
+            <td>\(-\pi/2\)</td>
+            <td>Forearm offset 70 mm</td>
+          </tr>
+          <tr>
+            <td>4 — Wrist roll</td>
+            <td>302</td>
+            <td>\(\theta_4\)</td>
+            <td>0</td>
+            <td>\(+\pi/2\)</td>
+            <td>Wrist length 302 mm</td>
+          </tr>
+          <tr>
+            <td>5 — Wrist pitch</td>
+            <td>0</td>
+            <td>\(\theta_5\)</td>
+            <td>0</td>
+            <td>\(-\pi/2\)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>6 — Tool flange</td>
+            <td>72</td>
+            <td>\(\theta_6 + \pi\)</td>
+            <td>0</td>
+            <td>\(0\)</td>
+            <td>Flange offset 72 mm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <p>
+        The total kinematic chain length is \(290 + 270 + 70 + 302 + 72 = 1004\) mm along
+        the fully-extended configuration. The nominal rated reach of the IRB120 is
+        <strong>580 mm</strong> due to joint-limit constraints and workspace geometry.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FORWARD KINEMATICS -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">05 — Forward Kinematics</div>
+    <h2 class="sec-title">Homogeneous transformation matrices</h2>
+    <div class="prose">
+      <p>
+        Forward kinematics answers: <em>given a set of joint angles, where is the end-effector?</em>
+        Using DH parameters, each consecutive frame transformation is a
+        <strong>4×4 homogeneous transformation matrix</strong>. Multiplying them in sequence
+        yields the full pose of the tool frame in the base frame.
+      </p>
+    </div>
+
+    <div class="math-display">
+      <div class="math-label">DH transformation — frame i−1 to frame i</div>
+      $$T_{i}^{i-1} = \begin{bmatrix}
+        \cos\theta_i & -\sin\theta_i\cos\alpha_i &  \sin\theta_i\sin\alpha_i & a_i\cos\theta_i \\
+        \sin\theta_i &  \cos\theta_i\cos\alpha_i & -\cos\theta_i\sin\alpha_i & a_i\sin\theta_i \\
+        0            &  \sin\alpha_i             &  \cos\alpha_i             & d_i             \\
+        0            &  0                        &  0                        & 1
+      \end{bmatrix}$$
+    </div>
+
+    <div class="math-display">
+      <div class="math-label">End-effector pose — base frame to tool frame</div>
+      $$T_6^0 = T_1^0 \cdot T_2^1 \cdot T_3^2 \cdot T_4^3 \cdot T_5^4 \cdot T_6^5
+             = \begin{bmatrix} R_{3\times3} & \mathbf{p}_{3\times1} \\ \mathbf{0}_{1\times3} & 1 \end{bmatrix}$$
+    </div>
+
+    <div class="prose" style="margin-top: 20px;">
+      <p>
+        The upper-left 3×3 block \(R\) encodes the orientation of the tool frame (roll–pitch–yaw).
+        The vector \(\mathbf{p} = [x,\, y,\, z]^\top\) gives the Cartesian position of the tool origin
+        in the base frame.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- INVERSE KINEMATICS -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">06 — Inverse Kinematics</div>
+    <h2 class="sec-title">Joint angle computation</h2>
+    <div class="two-col">
+      <div class="prose">
+        <p>
+          Inverse kinematics solves the inverse problem: <em>given a desired end-effector
+          position and orientation, compute the joint angles that achieve it.</em>
+          For a 6-DOF manipulator this is a system of 6 non-linear equations in 6 unknowns.
+        </p>
+        <p>
+          A <strong>geometric decoupling</strong> approach is applied. Because joints 4–6
+          form a spherical wrist — all three axes intersect at a single point — the position
+          subproblem (joints 1–3) and the orientation subproblem (joints 4–6) can be
+          solved independently.
+        </p>
+      </div>
+      <div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Wrist centre computation</div>
+              <div class="step-desc">Back-calculate the wrist centre position \(\mathbf{p}_{wc}\) from the desired tool pose and the known offset \(d_6\).</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Solve joints 1–3 (position)</div>
+              <div class="step-desc">\(\theta_1\) from the XY projection of \(\mathbf{p}_{wc}\). \(\theta_2, \theta_3\) resolved geometrically from the triangle formed by \(a_2\), \(a_3\), \(d_4\).</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Solve joints 4–6 (orientation)</div>
+              <div class="step-desc">With \(R_0^3\) known, compute the wrist rotation \(R_3^6 = (R_0^3)^\top R_0^6\). Extract \(\theta_4, \theta_5, \theta_6\) as ZYZ Euler angles.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Configuration selection</div>
+              <div class="step-desc">Multiple solution branches exist (elbow-up / elbow-down). The branch closest to the current joint state is selected to minimise motion.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JACOBIAN -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">07 — Velocity Kinematics</div>
+    <h2 class="sec-title">Jacobian matrix</h2>
+    <div class="prose">
+      <p>
+        The Jacobian \(J\) maps joint velocities \(\dot{\mathbf{q}}\) to end-effector linear and
+        angular velocities. For a 6-DOF arm, \(J \in \mathbb{R}^{6 \times 6}\) is partitioned into
+        a linear part \(J_v\) and an angular part \(J_\omega\):
+      </p>
+    </div>
+
+    <div class="math-display">
+      <div class="math-label">Velocity relationship</div>
+      <div class="math-group">
+        $$\begin{bmatrix} \mathbf{v} \\ \boldsymbol{\omega} \end{bmatrix} = J(\mathbf{q})\,\dot{\mathbf{q}},
+          \qquad J = \begin{bmatrix} J_v \\ J_\omega \end{bmatrix} \in \mathbb{R}^{6 \times 6}$$
+
+        $$J_i = \begin{bmatrix} \mathbf{z}_{i-1} \times (\mathbf{p}_n - \mathbf{p}_{i-1}) \\[4pt] \mathbf{z}_{i-1} \end{bmatrix}
+          \quad \text{(column } i \text{ for revolute joint } i\text{)}$$
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top: 20px;">
+      <p>
+        Singularities occur when \(\det(J) = 0\): the arm loses one or more degrees of freedom.
+        For the IRB120, singularities arise at fully-extended configurations
+        (shoulder singularity) and when joints 4 and 6 align (wrist singularity).
+        Trajectory planning avoids these regions.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- DYNAMICS -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">08 — Robot Dynamics</div>
+    <h2 class="sec-title">Lagrangian formulation</h2>
+    <div class="prose">
+      <p>
+        The dynamic model predicts the <strong>joint torques</strong> required to produce a given
+        motion, accounting for inertia, Coriolis and centrifugal effects, and gravity.
+        The Euler–Lagrange method starts from the kinetic and potential energies of all links.
+      </p>
+    </div>
+
+    <div class="math-display">
+      <div class="math-label">Lagrangian and energy terms</div>
+      <div class="math-group">
+        $$\mathcal{L} = K - P \qquad \text{(kinetic minus potential energy)}$$
+
+        $$K = \frac{1}{2} \sum_{i=1}^{6} \left[ m_i\,\dot{\mathbf{v}}_i^\top\dot{\mathbf{v}}_i
+              + \boldsymbol{\omega}_i^\top \mathbf{I}_i \boldsymbol{\omega}_i \right]$$
+
+        $$P = \sum_{i=1}^{6} m_i\, g\, z_{c_i}$$
+      </div>
+    </div>
+
+    <div class="math-display">
+      <div class="math-label">Euler–Lagrange equation (one per joint)</div>
+      $$\tau_i = \frac{d}{dt}\!\left(\frac{\partial \mathcal{L}}{\partial \dot{q}_i}\right) - \frac{\partial \mathcal{L}}{\partial q_i}$$
+    </div>
+
+    <div class="math-display">
+      <div class="math-label">Robot dynamics — matrix form</div>
+      $$\boldsymbol{\tau} = M(\mathbf{q})\,\ddot{\mathbf{q}} + C(\mathbf{q},\dot{\mathbf{q}})\,\dot{\mathbf{q}} + G(\mathbf{q})$$
+    </div>
+
+    <div class="spec-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 0;">
+      <div class="spec-card">
+        <div class="spec-lbl">Inertia matrix</div>
+        <div class="spec-val" style="font-size: 13px;">\(M(\mathbf{q}) \in \mathbb{R}^{6\times6}\)</div>
+        <div class="spec-sub">Positive definite; configuration-dependent</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Coriolis / centrifugal</div>
+        <div class="spec-val" style="font-size: 13px;">\(C(\mathbf{q},\dot{\mathbf{q}}) \in \mathbb{R}^{6\times6}\)</div>
+        <div class="spec-sub">Velocity-dependent coupling terms</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Gravity vector</div>
+        <div class="spec-val" style="font-size: 13px;">\(G(\mathbf{q}) \in \mathbb{R}^{6}\)</div>
+        <div class="spec-sub">Configuration-dependent static loads</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 24px;">
+      <p>
+        For each joint, the partial derivatives of the Lagrangian were evaluated symbolically
+        with respect to DH-derived expressions for link velocities and positions.
+        The resulting torque equations were implemented as Simulink function blocks and verified
+        against SimMechanics computed joint reaction forces.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TRAJECTORY -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">09 — Trajectory Generation</div>
+    <h2 class="sec-title">Smooth joint-space planning</h2>
+    <div class="two-col">
+      <div class="prose">
+        <p>
+          A <strong>quintic polynomial</strong> generates smooth reference trajectories for each
+          joint. The polynomial satisfies six boundary conditions — initial and final position,
+          velocity, and acceleration — ensuring the robot starts and ends at rest with zero acceleration.
+        </p>
+        <p>
+          For painting tasks, smooth trajectories are essential: abrupt velocity changes cause
+          brush-pressure variations that degrade stroke quality. The quintic ensures
+          <strong>zero jerk at waypoints</strong> when connecting multiple segments.
+        </p>
+      </div>
+      <div>
+        <div class="math-display">
+          <div class="math-label">Quintic polynomial trajectory</div>
+          $$q(t) = a_0 + a_1 t + a_2 t^2 + a_3 t^3 + a_4 t^4 + a_5 t^5$$
+        </div>
+        <div class="math-display" style="margin-top: 8px;">
+          <div class="math-label">Six boundary conditions</div>
+          $$q(0) = q_0,\quad q(t_f) = q_f$$
+          $$\dot{q}(0) = 0,\quad \dot{q}(t_f) = 0$$
+          $$\ddot{q}(0) = 0,\quad \ddot{q}(t_f) = 0$$
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULINK -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">10 — Implementation</div>
+    <h2 class="sec-title">Simulink control architecture</h2>
+    <div class="prose">
+      <p>
+        The closed-loop control system is implemented entirely in Simulink. A <strong>six-channel PID
+        controller</strong> — one per joint — receives the quintic trajectory reference and drives the
+        SimMechanics mechanical model. Joint angle sensors provide position feedback to close each loop.
+      </p>
+    </div>
+
+    <div class="mosaic">
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_1.png" alt="Top-level Simulink model" loading="lazy">
+        <div class="mosaic-cap">Top-level model — trajectory reference, PID bank, SimMechanics plant</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_2.png" alt="Joint control subsystem" loading="lazy">
+        <div class="mosaic-cap">Joint control subsystem</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_3.png" alt="Rigid body block" loading="lazy">
+        <div class="mosaic-cap">Rigid body link block</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_4.png" alt="PID controller" loading="lazy">
+        <div class="mosaic-cap">PID controller — P, I, D gains</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_5.png" alt="Simulink model 5" loading="lazy">
+        <div class="mosaic-cap">Trajectory generator block</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_6.png" alt="Simulink model 6" loading="lazy">
+        <div class="mosaic-cap">Forward kinematics output</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_7.png" alt="Simulink model 7" loading="lazy">
+        <div class="mosaic-cap">Dynamic torque computation subsystem</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulink_model_8.png" alt="Simulink model 8" loading="lazy">
+        <div class="mosaic-cap">Scope configuration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">11 — Results</div>
+    <h2 class="sec-title">3D simulation &amp; scope outputs</h2>
+    <div class="prose">
+      <p>
+        The simulation runs the full trajectory sequence: the robot moves from an initial
+        configuration through the planned waypoints, with SimMechanics rendering the 3D motion
+        in real time. Scope blocks capture <strong>joint angles, velocities, and control torques</strong>
+        for all six axes throughout the motion.
+      </p>
+    </div>
+
+    <div class="mosaic-2">
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulation_model_2.png" alt="Final configuration" loading="lazy">
+        <div class="mosaic-cap">Simulation — final configuration after trajectory</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulation_plotting_1.jpg" alt="Joint angle trajectories" loading="lazy">
+        <div class="mosaic-cap">Joint angle tracking — all 6 axes</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulation_plotting_2.png" alt="Position tracking" loading="lazy">
+        <div class="mosaic-cap">End-effector position tracking</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulation_plotting_3.png" alt="Scope output 3" loading="lazy">
+        <div class="mosaic-cap">Velocity profiles</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulation_plotting_4.png" alt="Scope output 4" loading="lazy">
+        <div class="mosaic-cap">Torque demands — joints 1–3</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/simulation_plotting_5.png" alt="Scope output 5" loading="lazy">
+        <div class="mosaic-cap">Torque demands — joints 4–6</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="https://raw.githubusercontent.com/drader/project-irb120/main/Images/Scope.png" alt="Matlab scope" loading="lazy">
+        <div class="mosaic-cap">Matlab scope — composite output</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">12 — Model Parameters</div>
+    <h2 class="sec-title">Full simulation specification</h2>
+    <div class="spec-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+      <div class="spec-card">
+        <div class="spec-lbl">Robot model</div>
+        <div class="spec-val">ABB IRB120 3/0.6</div>
+        <div class="spec-sub">Compact articulated arm</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Degrees of freedom</div>
+        <div class="spec-val">6</div>
+        <div class="spec-sub">All revolute (RRRRRR)</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Simulation solver</div>
+        <div class="spec-val">ode45</div>
+        <div class="spec-sub">Runge–Kutta 4/5, variable step</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Relative tolerance</div>
+        <div class="spec-val">1 × 10⁻³</div>
+        <div class="spec-sub">Integration accuracy</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Joint control</div>
+        <div class="spec-val">PID</div>
+        <div class="spec-sub">Independent per axis</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Trajectory type</div>
+        <div class="spec-val">Quintic</div>
+        <div class="spec-sub">5th-order polynomial, joint space</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Dynamics model</div>
+        <div class="spec-val">Lagrangian</div>
+        <div class="spec-sub">\(M\ddot{q} + C\dot{q} + G\) formulation</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Geometry source</div>
+        <div class="spec-val">ABB STL files</div>
+        <div class="spec-sub">Official CAD from ABB repository</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Environment</div>
+        <div class="spec-val">Matlab R2014a</div>
+        <div class="spec-sub">Simulink + SimMechanics toolbox</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Base height \(d_1\)</div>
+        <div class="spec-val">290 mm</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Upper arm \(a_2\)</div>
+        <div class="spec-val">270 mm</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-lbl">Wrist length \(d_4\)</div>
+        <div class="spec-val">302 mm</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <p>Part of <a href="index.html">Oğuz Gençer's portfolio</a></p>
+    <p>Bachelor Graduation Project · Istanbul Aydın University · 2014</p>
+  </div>
+</footer>
+
+</body>
+</html>

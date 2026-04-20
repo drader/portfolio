@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Oğuz Gençer — PhD Researcher & Software Engineer</title>
+<meta name="description" content="PhD Candidate at Istanbul Technical University. Software Engineer with expertise in AI, neuromorphic systems, nanoscience, and open-source tooling. 3 peer-reviewed publications.">
+<meta name="keywords" content="Oğuz Gençer, software engineer, AI researcher, neuromorphic computing, spiking neural networks, Intel LAVA, nanoscience, quantum dots, LangChain, TensorFlow, Istanbul Technical University, BSH, open source">
+<meta name="author" content="Oğuz Gençer">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Oğuz Gençer — PhD Researcher & Software Engineer">
+<meta property="og:description" content="PhD Candidate at ITU. Software Engineer specializing in AI systems, neuromorphic computing, and nanoscience. 3 peer-reviewed publications.">
+<meta property="og:url" content="https://oguzgencer.dev">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oğuz Gençer — PhD Researcher & Software Engineer">
+<meta name="twitter:description" content="PhD Candidate at ITU. AI systems, neuromorphic computing, nanoscience.">
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Oğuz Gençer",
+  "jobTitle": "PhD Researcher & Software Engineer",
+  "description": "PhD Candidate at Istanbul Technical University specializing in neuromorphic systems and nanosensors. Software Engineer with expertise in AI and deep learning.",
+  "url": "https://oguzgencer.dev",
+  "email": "oguzgencer@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR" },
+  "sameAs": [
+    "https://github.com/drader",
+    "https://linkedin.com/in/oguzgencer",
+    "https://orcid.org/0000-0001-7460-9984"
+  ],
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Istanbul Technical University" },
+    { "@type": "CollegeOrUniversity", "name": "Istanbul Aydin University" }
+  ],
+  "knowsAbout": ["AI", "Machine Learning", "Deep Learning", "Neuromorphic Computing", "Nanotechnology", "Python", "TensorFlow", "PyTorch", "LangChain", "Spiking Neural Networks", "Quantum Dots"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #0f172a;
+  --bg2:        #1e293b;
+  --bg3:        #253347;
+  --border:     rgba(148,163,184,0.1);
+  --border2:    rgba(148,163,184,0.06);
+  --sky:        #38bdf8;
+  --sky-dim:    rgba(56,189,248,0.12);
+  --indigo:     #818cf8;
+  --indigo-dim: rgba(129,140,248,0.12);
+  --amber:      #fbbf24;
+  --amber-dim:  rgba(251,191,36,0.1);
+  --green:      #34d399;
+  --text:       #f1f5f9;
+  --text-md:    #cbd5e1;
+  --dim:        #94a3b8;
+  --dimmer:     #475569;
+  --radius:     12px;
+  --radius-sm:  8px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── UTILS ──────────────────────────────── */
+.container { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+section { padding: 96px 0; }
+a { color: inherit; text-decoration: none; }
+
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: var(--dim);
+  max-width: none;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* ─── NAV ────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(15,23,42,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.nav-logo em { color: var(--sky); font-style: normal; }
+.nav-links { display: flex; gap: 26px; list-style: none; }
+.nav-links a { font-size: 13.5px; font-weight: 500; color: var(--dim); transition: color 0.15s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--sky);
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 6px;
+  transition: opacity 0.15s;
+}
+.nav-cta:hover { opacity: 0.88; }
+
+/* ─── HERO ───────────────────────────────── */
+#hero {
+  padding-top: 156px;
+  padding-bottom: 96px;
+  position: relative;
+  overflow: hidden;
+}
+#hero::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -180px;
+  width: 680px; height: 680px;
+  background: radial-gradient(circle at center, rgba(56,189,248,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.2);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: live 2s ease-in-out infinite;
+}
+@keyframes live { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+.hero-name {
+  font-size: clamp(42px, 7.5vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.hero-titles { display: flex; align-items: center; gap: 14px; margin: 20px 0 32px; flex-wrap: wrap; }
+.hero-title-sep { color: var(--dimmer); font-size: 18px; font-weight: 300; line-height: 1; }
+.hero-title-group { display: flex; flex-direction: column; gap: 10px; }
+.hero-title-label { font-size: clamp(18px, 2.2vw, 22px); font-weight: 700; letter-spacing: -0.01em; }
+.hero-title-kws { display: flex; flex-wrap: wrap; gap: 5px; }
+.hero-title-kws span {
+  font-size: 11.5px; color: var(--dimmer);
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 4px; padding: 2px 9px;
+  font-family: 'Inter', sans-serif;
+}
+
+.hero-role {
+  font-size: clamp(17px, 2.5vw, 24px);
+  font-weight: 400;
+  color: var(--dim);
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+.hero-role strong { color: var(--sky); font-weight: 600; }
+
+.hero-desc {
+  font-size: 17px;
+  color: var(--dim);
+  max-width: 540px;
+  line-height: 1.78;
+  margin-bottom: 40px;
+}
+
+.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 20px; border-radius: var(--radius-sm);
+  font-size: 14.5px; font-weight: 600; cursor: pointer;
+  border: none; transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-primary   { background: var(--sky); color: #0f172a; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-outline   { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+.btn-outline:hover { border-color: var(--dimmer); }
+.btn-ghost     { background: transparent; color: var(--dim); font-size: 14px; padding: 9px 16px; border: 1px solid var(--border2); }
+.btn-ghost:hover { color: var(--text); }
+
+.hero-social {
+  margin-top: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hero-social-label { font-size: 12px; color: var(--dimmer); margin-right: 4px; }
+.social-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 13px;
+  font-size: 13px;
+  color: var(--dim);
+  transition: all 0.15s;
+}
+.social-pill:hover { border-color: var(--sky); color: var(--text); }
+.social-pill svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+/* ─── ABOUT ──────────────────────────────── */
+#about { border-top: 1px solid var(--border); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 60px;
+  align-items: start;
+  margin-top: 48px;
+}
+.about-body p { font-size: 15.5px; color: var(--dim); line-height: 1.82; margin-bottom: 16px; }
+.about-body p:last-child { margin-bottom: 0; }
+.about-body p strong { color: var(--text-md); font-weight: 500; }
+
+.about-stats { display: flex; flex-direction: column; gap: 14px; }
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.stat-num {
+  font-size: 34px; font-weight: 800; color: var(--sky);
+  letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px;
+}
+.stat-label { font-size: 13px; color: var(--dim); }
+
+/* ─── FOCUS AREAS ────────────────────────── */
+#focus { border-top: 1px solid var(--border); }
+.focus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 48px;
+}
+.focus-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.focus-card:hover { border-color: rgba(56,189,248,0.25); transform: translateY(-2px); }
+.focus-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.focus-icon { font-size: 22px; line-height: 1; flex-shrink: 0; }
+.focus-title { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.focus-desc { font-size: 14px; color: var(--dim); line-height: 1.7; }
+
+/* ─── EXPERIENCE ─────────────────────────── */
+#experience { border-top: 1px solid var(--border); }
+.exp-layout { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 48px; }
+
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px; bottom: 6px;
+  width: 2px;
+  background: var(--border);
+}
+
+.exp-item {
+  position: relative;
+  padding: 0 0 40px 28px;
+}
+.exp-item:last-child { padding-bottom: 0; }
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: -4px; top: 5px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--sky);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px rgba(56,189,248,0.2);
+}
+.exp-item.dim-role::before { background: var(--bg3); border-color: var(--dimmer); box-shadow: none; }
+
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 10px; }
+.exp-left { display: flex; flex-direction: column; gap: 3px; }
+.exp-title { font-size: 15.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.exp-company { font-size: 14px; color: var(--sky); font-weight: 500; }
+.exp-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; }
+.exp-date { font-size: 12px; font-family: 'JetBrains Mono', monospace; color: var(--dim); white-space: nowrap; }
+.exp-loc { color: var(--dim); font-size: 12px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.exp-bullets li {
+  font-size: 14px; color: var(--dim); line-height: 1.65;
+  padding-left: 14px; position: relative;
+}
+.exp-bullets li::before {
+  content: '–';
+  position: absolute; left: 0;
+  color: var(--dimmer);
+}
+.exp-tag {
+  display: inline-block; margin-top: 10px; margin-right: 6px;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--dim); font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  padding: 2px 8px; border-radius: 4px;
+}
+
+.exp-earlier {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border2);
+}
+.exp-earlier-label {
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--dimmer); margin-bottom: 16px;
+}
+.exp-compact { display: flex; flex-direction: column; gap: 12px; }
+.exp-compact-item {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; align-items: baseline;
+  padding: 12px 16px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.exp-compact-left {}
+.exp-compact-title { font-size: 14px; font-weight: 600; color: var(--text-md); }
+.exp-compact-company { font-size: 13px; color: var(--dim); margin-top: 1px; }
+.exp-compact-date { font-size: 11.5px; font-family: 'JetBrains Mono', monospace; color: var(--dimmer); }
+
+/* ─── PROJECTS ───────────────────────────── */
+#projects { border-top: 1px solid var(--border); }
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 48px; }
+
+.project-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.project-card:hover { border-color: rgba(56,189,248,0.3); transform: translateY(-2px); }
+.project-card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+
+.project-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.project-icon {
+  width: 42px; height: 42px;
+  background: var(--sky-dim);
+  border: 1px solid rgba(56,189,248,0.15);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.project-links-row { display: flex; gap: 7px; }
+.proj-link {
+  height: 28px; padding: 0 10px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 500; font-family: 'Inter', sans-serif;
+  color: var(--dim); transition: all 0.15s; text-decoration: none;
+  white-space: nowrap;
+}
+.proj-link:hover { border-color: var(--sky); color: var(--sky); }
+
+.project-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--sky);
+}
+.project-name { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.project-badge {
+  display: inline-block; background: var(--sky-dim); color: var(--sky);
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  padding: 2px 7px; border-radius: 4px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+.project-desc { font-size: 14px; color: var(--dim); line-height: 1.68; flex-grow: 1; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.tag {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--dimmer); font-size: 11.5px; font-family: 'JetBrains Mono', monospace;
+  padding: 2px 9px; border-radius: 4px; transition: color 0.15s;
+}
+.project-card:hover .tag { color: var(--dim); }
+
+/* ─── ECOSYSTEM CARD ────────────────────── */
+.ecosystem-items { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.ecosystem-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: #0b1120;
+}
+.ecosystem-item-icon { font-size: 17px; flex-shrink: 0; }
+.ecosystem-item-info { flex: 1; min-width: 0; }
+.ecosystem-item-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.ecosystem-item-desc { font-size: 12px; color: var(--dimmer); margin-top: 2px; }
+
+/* ─── PROJECT FILTERS ───────────────────── */
+.project-filters { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+.project-chip {
+  padding: 5px 14px; border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent; color: var(--dim);
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s; font-family: 'Inter', sans-serif;
+}
+.project-chip:hover { color: var(--text); border-color: var(--dimmer); }
+.project-chip.active { border-color: var(--sky); color: var(--sky); }
+.project-card { transition: opacity 0.2s, transform 0.2s; }
+.project-card.dimmed { opacity: 0.25; }
+
+/* ─── PUBLICATIONS ───────────────────────── */
+#publications { border-top: 1px solid var(--border); }
+.pub-list { display: flex; flex-direction: column; gap: 14px; margin-top: 48px; }
+
+.pub-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-left: 3px solid var(--indigo);
+  border-radius: var(--radius); padding: 24px 26px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 24px; align-items: center;
+  transition: border-color 0.2s;
+}
+.pub-card:hover { border-color: rgba(129,140,248,0.5); }
+
+.pub-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; flex-wrap: wrap; }
+.pub-type {
+  display: inline-block; background: var(--indigo-dim);
+  border: 1px solid rgba(129,140,248,0.2); color: var(--indigo);
+  font-size: 10.5px; font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px;
+  text-transform: uppercase;
+}
+.pub-venue { font-size: 12px; color: var(--dim); font-style: italic; }
+.pub-year  { font-size: 12px; color: var(--dim); }
+
+.pub-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 5px; letter-spacing: -0.01em; line-height: 1.45; }
+.pub-authors { font-size: 13px; color: var(--dim); }
+.pub-authors strong { color: var(--text-md); }
+
+.pub-link {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 500; color: var(--indigo);
+  background: var(--indigo-dim); border: 1px solid rgba(129,140,248,0.2);
+  padding: 7px 14px; border-radius: 6px; white-space: nowrap;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.pub-link:hover { background: rgba(129,140,248,0.2); }
+
+/* ─── SKILLS ─────────────────────────────── */
+#skills { border-top: 1px solid var(--border); }
+.skills-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; margin-top: 48px; }
+.skill-group { grid-column: span 2; }
+.skill-group.wide { grid-column: span 3; }
+
+.skill-group {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px;
+}
+.skill-group-title {
+  font-size: 11px; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--sky); letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-tag {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text-md); font-size: 12px;
+  padding: 3px 10px; border-radius: 5px;
+}
+
+/* ─── EDUCATION ──────────────────────────── */
+#education { border-top: 1px solid var(--border); }
+.edu-list { display: flex; flex-direction: column; gap: 14px; margin-top: 48px; }
+
+.edu-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-left: 3px solid var(--sky);
+  border-radius: var(--radius); padding: 22px 26px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 24px; align-items: start;
+  transition: border-color 0.2s;
+}
+.edu-card:hover { border-left-color: var(--indigo); }
+.edu-card.phd { border-left-color: var(--indigo); }
+.edu-card.phd:hover { border-left-color: var(--sky); }
+.edu-degree { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.edu-school { font-size: 14px; color: var(--sky); margin-bottom: 8px; font-weight: 500; }
+.edu-card.phd .edu-school { color: var(--indigo); }
+.edu-detail { font-size: 13px; color: var(--dim); line-height: 1.65; }
+.edu-thesis {
+  margin-top: 8px; font-size: 13px; color: var(--dim);
+  padding-left: 12px; border-left: 2px solid var(--border);
+  font-style: italic;
+}
+.edu-date {
+  font-size: 12px; color: var(--dim);
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap; text-align: right;
+}
+.edu-badge {
+  display: inline-block; margin-top: 6px;
+  background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.2);
+  color: var(--indigo); font-size: 10.5px;
+  font-family: 'JetBrains Mono', monospace; padding: 2px 8px; border-radius: 4px;
+}
+
+/* ─── CERTIFICATIONS ─────────────────────── */
+.cert-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px;
+}
+.cert-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px 18px;
+  display: flex; align-items: center; gap: 14px;
+}
+.cert-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--amber-dim); border: 1px solid rgba(251,191,36,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.cert-name { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.cert-issuer { font-size: 12px; color: var(--dim); }
+.cert-date { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--dim); margin-top: 2px; }
+
+/* ─── BEYOND ─────────────────────────────── */
+#beyond { border-top: 1px solid var(--border); }
+.beyond-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 14px; margin-top: 48px;
+}
+.beyond-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 14px;
+  text-align: center; transition: border-color 0.2s, transform 0.2s;
+}
+.beyond-card:hover { border-color: rgba(56,189,248,0.25); transform: translateY(-2px); }
+.beyond-icon { font-size: 28px; margin-bottom: 10px; line-height: 1; }
+.beyond-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.beyond-detail { font-size: 11.5px; color: var(--dim); font-family: 'JetBrains Mono', monospace; }
+
+/* ─── CURRENTLY ──────────────────────────── */
+#currently { border-top: 1px solid var(--border); }
+.currently-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 48px; }
+
+.now-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px;
+  transition: border-color 0.2s;
+}
+.now-card:hover { border-color: rgba(56,189,248,0.2); }
+.now-type {
+  font-size: 10.5px; font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--sky);
+  margin-bottom: 9px; opacity: 0.85;
+}
+.now-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+.now-card p  { font-size: 13.5px; color: var(--dim); line-height: 1.65; }
+.now-tag {
+  display: inline-block; margin-top: 13px;
+  background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.15);
+  color: var(--sky); font-size: 10.5px;
+  font-family: 'JetBrains Mono', monospace; padding: 2px 9px; border-radius: 4px;
+}
+
+/* ─── CONTACT ────────────────────────────── */
+#contact { border-top: 1px solid var(--border); }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: start; margin-top: 48px;
+}
+.contact-left h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 10px; letter-spacing: -0.02em; }
+.contact-left p  { font-size: 14.5px; color: var(--dim); line-height: 1.78; margin-bottom: 24px; }
+
+.contact-items { display: flex; flex-direction: row; gap: 9px; }
+.contact-item {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13.5px; color: var(--dim);
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--bg2);
+  transition: all 0.15s;
+}
+.contact-item:hover { border-color: var(--sky); color: var(--text); }
+.contact-item-icon {
+  width: 30px; height: 30px; border-radius: 7px;
+  background: var(--bg3); display: flex; align-items: center;
+  justify-content: center; font-size: 14px; flex-shrink: 0; color: var(--dim);
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 13px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 12.5px; font-weight: 500; color: var(--dim); }
+.form-group input,
+.form-group textarea {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 13px;
+  color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif;
+  transition: border-color 0.15s; resize: none;
+}
+.form-group input:focus,
+.form-group textarea:focus { outline: none; border-color: var(--sky); }
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--dimmer); }
+
+/* ─── FOOTER ─────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 26px 0;
+}
+.footer-inner {
+  max-width: 1040px; margin: 0 auto; padding: 0 32px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: 13px; color: var(--dimmer); }
+footer span { color: var(--sky); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 13px; color: var(--dimmer); transition: color 0.15s; }
+.footer-links a:hover { color: var(--text); }
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  section { padding: 64px 0; }
+  .nav-links, .nav-cta { display: none; }
+  .about-grid, .focus-grid, .projects-grid, .skills-grid,
+  .currently-grid, .contact-grid, .cert-row { grid-template-columns: 1fr !important; gap: 18px; }
+  .project-card.wide { grid-column: 1; display: flex; }
+  .pub-card { grid-template-columns: 1fr; gap: 14px; }
+  .edu-card { grid-template-columns: 1fr; gap: 6px; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+  .hero-social { flex-wrap: wrap; }
+  .beyond-grid { grid-template-columns: repeat(3, 1fr); }
+  .exp-compact-item { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* ─── ANIMATIONS ─────────────────────────── */
+.fade {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade.in { opacity: 1; transform: translateY(0); }
+
+::selection { background: rgba(56,189,248,0.2); color: var(--text); }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Oğuz <em>Gençer</em></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publications">Research</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="CVogencer.pdf" download class="nav-cta">Download CV</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      PhD Candidate · Istanbul Technical University
+    </div>
+
+    <h1 class="hero-name">Oğuz Gençer</h1>
+
+    <div class="hero-titles">
+      <span class="hero-title-label" style="color:#38bdf8;">Engineer</span>
+      <span class="hero-title-label" style="color:#34d399;">Scientist</span>
+      <span class="hero-title-label" style="color:#a78bfa;">Explorer</span>
+      <span class="hero-title-label" style="color:#fbbf24;">Synthesizer</span>
+      <!-- keywords for later:
+        Engineer: Software, Systems Design, Embedded, DevOps
+        Inventor: AI & LLM, Agentic AI, Hardware
+        Scientist: Nanoscience, Nanoelectronics, Biocompatibility
+        Pioneer: Team Leadership, Mentoring, Vision
+      -->
+    </div>
+
+    <p class="hero-desc">
+      Electrical &amp; Electronics Engineer, experienced software developer, and nanoscience
+      researcher at Istanbul Technical University. My research focuses on neuromorphic computing —
+      specifically, how nanoscience can solve the material and sensing challenges that stand
+      between today's SNN research and practical neuromorphic systems.
+    </p>
+
+    <div class="hero-social">
+      <a href="https://github.com/drader" target="_blank" rel="noopener" class="social-pill">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/oguzgencer" target="_blank" rel="noopener" class="social-pill">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://orcid.org/0000-0001-7460-9984" target="_blank" rel="noopener" class="social-pill">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.988-1.444 3.988-3.722 0-2.206-1.547-3.722-3.988-3.722h-2.297z"/></svg>
+        ORCID
+      </a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ABOUT ════════════════════════════════════ -->
+<section id="about">
+  <div class="container fade">
+    <span class="label">About</span>
+    <h2 class="section-title">Who I am</h2>
+
+    <div class="about-grid">
+      <div class="about-body">
+        <p>
+          I'm an Electrical &amp; Electronics Engineer with over a decade of professional software development
+          experience, and a researcher in Nanoscience &amp; Nanoengineering at Istanbul Technical University.
+          My academic interest converges on the junction of <strong>nanoscience, neuroscience, electronics,
+          and AI &amp; Data Science</strong> — fields I've been deliberately navigating toward since the early
+          years of my career, driven by a specific engineering question I wanted to answer.
+        </p>
+        <p>
+          The research context matters: CMOS silicon technology is hitting its nanoscale wall, and the field
+          knows it. The leading alternative computing paradigms — quantum, photonic, and neuromorphic —
+          each represent a different bet on what follows. <strong>My bet is neuromorphic.</strong> I study how
+          nanoscience can clear the material and sensing obstacles that neuromorphic systems currently face.
+          My MSc established a foundation in quantum dot synthesis and characterization; my PhD takes the next step:
+          designing, fabricating, and characterizing a novel <strong>nanofiber-based material</strong> to improve
+          neural signal recording quality and efficiency from primary neuron cultures.
+        </p>
+        <p>
+          My path to the lab wasn't linear. During my BSc I founded <strong>HIDROGU</strong> at Osmangazi
+          University — a student research team built around a hard engineering problem — which gave me an early
+          grounding in cross-disciplinary project execution and leading people through uncertain territory.
+          That instinct carried through: a year as a field engineer and project coordinator in
+          <strong>Kabul, Afghanistan</strong>, team leadership across building automation and international
+          telecoms, and software shipped at BSH Turkey, Rigel Technology, and Sunny Electronics.
+          At BSH Turkey, I ran two parallel tracks: a formal assignment to a
+          <strong>Bavaria Government-funded LLM project</strong> with BSH Germany, and a self-initiated
+          <strong>AI Core Team</strong> effort within the local R&amp;D team — unconnected to the global project,
+          driven by the conviction that the team needed a structured path into AI. I also build open-source
+          tools — the <strong>memex ecosystem</strong> — for researchers and engineers who live between disciplines.
+        </p>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Peer-reviewed publications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Degrees (Asc., 2× BSc, MSc, PhD in progress)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years of professional experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Countries worked in</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OPEN SOURCE PROJECTS ═════════════════════ -->
+<section id="projects">
+  <div class="container fade">
+    <span class="label">Projects</span>
+    <h2 class="section-title">What I'm building</h2>
+    <p class="section-sub">Open source tools, research prototypes, and side projects spanning AI, hardware, and scientific tooling.</p>
+
+    <div class="project-filters">
+      <button class="project-chip active" data-filter="all">All</button>
+      <button class="project-chip" data-filter="released">Released</button>
+      <button class="project-chip" data-filter="indev">In Dev</button>
+      <button class="project-chip" data-filter="research">Research</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- memex ecosystem -->
+      <div class="project-card wide" data-category="released">
+        <div>
+          <div class="project-top" style="margin-bottom:14px;">
+            <div class="project-icon">🗄️</div>
+            <div class="project-links-row">
+              <a href="https://github.com/drader/memex" target="_blank" rel="noopener" class="proj-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+              <a href="memex_presentation.html" class="proj-link">⬡ Overview</a>
+            </div>
+          </div>
+          <div class="project-kicker" style="margin-bottom:6px;">Knowledge infrastructure</div>
+          <div class="project-name">memex <span class="project-badge">featured</span> <span class="project-badge" style="background:rgba(52,211,153,0.1);color:#34d399;">Released</span> <span class="project-badge" style="background:rgba(100,116,139,0.1);color:#64748b;">4 projects</span></div>
+          <p class="project-desc" style="margin-top:12px;">A hybrid agentic wiki template — TypeScript scheduler, Markdown content layer, MCP-powered hybrid search (BM25 + vector via RRF). The foundation for three specialized knowledge tools.</p>
+          <div class="project-stack" style="margin-top:12px;">
+            <span class="tag">TypeScript</span>
+            <span class="tag">Claude API</span>
+            <span class="tag">MCP</span>
+            <span class="tag">obsidian-hybrid-search</span>
+            <span class="tag">node-cron</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:12px;font-family:'JetBrains Mono',monospace;">Built on memex</div>
+          <div class="ecosystem-items">
+            <div class="ecosystem-item">
+              <span class="ecosystem-item-icon">📄</span>
+              <div class="ecosystem-item-info">
+                <div class="ecosystem-item-name">papervault <span class="project-badge" style="background:rgba(52,211,153,0.1);color:#34d399;">Released</span></div>
+                <div class="ecosystem-item-desc">Agentic research library for arXiv papers</div>
+              </div>
+              <a href="https://github.com/drader/papervault" target="_blank" rel="noopener" class="proj-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+            </div>
+            <div class="ecosystem-item">
+              <span class="ecosystem-item-icon">📚</span>
+              <div class="ecosystem-item-info">
+                <div class="ecosystem-item-name">docvault <span class="project-badge" style="background:rgba(52,211,153,0.1);color:#34d399;">Released</span></div>
+                <div class="ecosystem-item-desc">Developer docs &amp; changelog knowledge base</div>
+              </div>
+              <a href="https://github.com/drader/docvault" target="_blank" rel="noopener" class="proj-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+            </div>
+            <div class="ecosystem-item">
+              <span class="ecosystem-item-icon">🎙️</span>
+              <div class="ecosystem-item-info">
+                <div class="ecosystem-item-name">podvault <span class="project-badge" style="background:rgba(52,211,153,0.1);color:#34d399;">Released</span></div>
+                <div class="ecosystem-item-desc">Podcast knowledge base from transcripts</div>
+              </div>
+              <a href="https://github.com/drader/podvault" target="_blank" rel="noopener" class="proj-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NeuralLab Assistant -->
+      <div class="project-card" data-category="indev">
+        <div class="project-top">
+          <div class="project-icon">🧪</div>
+          <div class="project-links-row"><a href="neurallab_presentation.html" class="proj-link">⬡ Overview</a></div>
+        </div>
+        <div class="project-kicker">Research tool</div>
+        <div class="project-name">NeuralLab Assistant <span class="project-badge" style="background:rgba(251,191,36,0.12);color:#fbbf24;">in dev</span></div>
+        <p class="project-desc">A hands-free voice assistant for primary neuron culture labs. Contamination risk makes touching devices during experiments hazardous — this assistant handles note-taking, timer control, calculations, and protocol step tracking entirely through voice commands.</p>
+        <div class="project-stack">
+          <span class="tag">Voice UI</span><span class="tag">Protocol Tracking</span><span class="tag">Python</span><span class="tag">Lab Tools</span>
+        </div>
+      </div>
+
+      <!-- petFence -->
+      <div class="project-card" data-category="indev">
+        <div class="project-top">
+          <div class="project-icon">🐾</div>
+          <div class="project-links-row"><a href="petfence_presentation.html" class="proj-link">⬡ Overview</a></div>
+        </div>
+        <div class="project-kicker">Hardware / IoT</div>
+        <div class="project-name">petFence <span class="project-badge" style="background:rgba(251,191,36,0.12);color:#fbbf24;">in dev</span></div>
+        <p class="project-desc">A system for keeping pets away from selected zones within home or office environments. Combines zone definition, sensor-based detection, and a non-harmful deterrent mechanism — designed to be unobtrusive and easy to configure.</p>
+        <div class="project-stack">
+          <span class="tag">IoT</span><span class="tag">System Design</span><span class="tag">Hardware</span><span class="tag">Embedded</span>
+        </div>
+      </div>
+
+      <!-- Paragliding CAD -->
+      <div class="project-card" data-category="indev">
+        <div class="project-top">
+          <div class="project-icon">🪂</div>
+          <div class="project-links-row"><a href="paraglider_presentation.html" class="proj-link">⬡ Overview</a></div>
+        </div>
+        <div class="project-kicker">CAD / Simulation</div>
+        <div class="project-name">Paraglider Design Tool <span class="project-badge" style="background:rgba(251,191,36,0.12);color:#fbbf24;">in dev</span></div>
+        <p class="project-desc">A CAD-based software tool for parametric design and simulation of paragliders and similar aircraft. Allows pilots and designers to define geometry through parameters and visualize aerodynamic behavior before fabrication.</p>
+        <div class="project-stack">
+          <span class="tag">Parametric CAD</span><span class="tag">Simulation</span><span class="tag">Python</span><span class="tag">Aerodynamics</span>
+        </div>
+      </div>
+
+      <!-- PhD Thesis Research -->
+      <div class="project-card" data-category="research">
+        <div class="project-top">
+          <div class="project-icon">🔬</div>
+          <div class="project-links-row"><a href="nanofiber_presentation.html" class="proj-link">⬡ Overview</a></div>
+        </div>
+        <div class="project-kicker">PhD Thesis · ITU</div>
+        <div class="project-name">Neural Interface Nanofiber Research <span class="project-badge" style="background:rgba(251,113,133,0.12);color:#fb7185;">Experimental Research</span></div>
+        <p class="project-desc">Fabrication and characterization of a biocompatible nanofiber-based coating at the neuron–electrode interface — targeting improved signal quality and reduced data loss in primary neuron cultures. A foundational step toward practical neuromorphic sensing systems.</p>
+        <div class="project-stack">
+          <span class="tag">Nanofabrication</span><span class="tag">Biocompatibility</span><span class="tag">Neuroscience</span><span class="tag">Characterization</span>
+        </div>
+      </div>
+
+      <!-- IRB120 -->
+      <div class="project-card" data-category="released">
+        <div class="project-top">
+          <div class="project-icon">🤖</div>
+          <div class="project-links-row">
+            <a href="https://github.com/drader/project-irb120" target="_blank" rel="noopener" class="proj-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+            <a href="irb120_presentation.html" class="proj-link">⬡ Overview</a>
+          </div>
+        </div>
+        <div class="project-kicker">Graduation Project · Istanbul Aydin University</div>
+        <div class="project-name">ABB IRB120 Robot Arm Simulation <span class="project-badge" style="background:rgba(52,211,153,0.1);color:#34d399;">Released</span></div>
+        <p class="project-desc">Modeling and simulation of the ABB IRB120 industrial robot arm using Matlab &amp; Simulink. Covers forward/inverse kinematics, trajectory planning, and dynamic simulation of the 6-DOF manipulator.</p>
+        <div class="project-stack">
+          <span class="tag">Matlab</span><span class="tag">Simulink</span><span class="tag">Robotics</span><span class="tag">Kinematics</span>
+        </div>
+      </div>
+
+      <!-- Agentic AI R&D -->
+      <div class="project-card" data-category="research">
+        <div class="project-top">
+          <div class="project-icon">🤖</div>
+          <div class="project-links-row">
+            <a href="https://github.com/drader" target="_blank" rel="noopener" class="proj-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+            <a href="agentic_presentation.html" class="proj-link">⬡ Overview</a>
+          </div>
+        </div>
+        <div class="project-kicker">Ongoing research</div>
+        <div class="project-name">Agentic AI R&amp;D <span class="project-badge" style="background:rgba(129,140,248,0.12);color:#818cf8;">Research</span></div>
+        <p class="project-desc">Closely tracking the agentic AI landscape — architectures, emerging patterns, and open problems. Building tools like memex as practical explorations of what reliable, long-running AI agents actually require in production.</p>
+        <div class="project-stack">
+          <span class="tag">LLM</span><span class="tag">Claude API</span><span class="tag">TypeScript</span><span class="tag">MCP</span><span class="tag">Research</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOCUS AREAS ══════════════════════════════ -->
+<section id="focus">
+  <div class="container fade">
+    <span class="label">Focus Areas</span>
+    <h2 class="section-title">What I work on</h2>
+    <p class="section-sub">My work spans four overlapping domains — each informing the others.</p>
+
+    <div class="focus-grid">
+      <div class="focus-card">
+        <div class="focus-header"><div class="focus-icon">🧠</div><div class="focus-title">Neuromorphic AI Research</div></div>
+        <div class="focus-desc">
+          Investigating noninvasive methods for neural signal recording through active nanoscience
+          research. A successful outcome would directly benefit neuromorphic computing systems.
+          Supporting toolkit: Intel Loihi 2, TCAD, and LTSpice for simulation and verification.
+        </div>
+      </div>
+      <div class="focus-card">
+        <div class="focus-header"><div class="focus-icon">⚙️</div><div class="focus-title">AI & Software Engineering</div></div>
+        <div class="focus-desc">
+          GenAI systems with LangChain and LangFlow, deep learning with TensorFlow and PyTorch,
+          CI/CD pipelines, and embedded software. Industry experience from consumer electronics
+          to Fortune 500 enterprise AI.
+        </div>
+      </div>
+      <div class="focus-card">
+        <div class="focus-header"><div class="focus-icon">🔬</div><div class="focus-title">Nanoscience & Sensing</div></div>
+        <div class="focus-desc">
+          Quantum dot synthesis (Zinc-Doped Carbon-Based QDs via microwave-assisted methods),
+          advanced characterization (UV-VIS, FTIR, XPS, SEM, TEM), and nanodevice design
+          for sensing applications. PhD work: fabrication and characterization of a biocompatible
+          nanofiber-based coating at the neuron–electrode interface — improving signal quality
+          and reducing data loss in primary neuron cultures.
+        </div>
+      </div>
+      <div class="focus-card">
+        <div class="focus-header"><div class="focus-icon">🛠️</div><div class="focus-title">Open Source Tooling</div></div>
+        <div class="focus-desc">
+          Building the <strong style="color:var(--text-md);">memex ecosystem</strong>: agentic wiki templates
+          for researchers (papervault), engineers (docvault), and knowledge workers.
+          TypeScript + Claude API + MCP search — knowledge infrastructure that compounds.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ════════════════════════════════ -->
+<section id="experience">
+  <div class="container fade">
+    <span class="label">Experience</span>
+    <h2 class="section-title">Career timeline</h2>
+
+    <div class="timeline">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">PhD Researcher</div>
+            <div class="exp-company">Istanbul Technical University</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Sep 2022 – Present</div><div class="exp-loc">Istanbul, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developing a novel noninvasive method and nanosensor for neural activity recording.</li>
+          <li>Specializing in Neuroscience, Neuromorphic Systems, Nanoelectronics, AI, and Data Science.</li>
+        </ul>
+        <span class="exp-tag">Intel LAVA</span>
+        <span class="exp-tag">Neuromorphics</span>
+        <span class="exp-tag">TCAD</span>
+        <span class="exp-tag">Nanosensors</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">Software Engineer, R&D — Cooling Division</div>
+            <div class="exp-company">BSH Turkey (Bosch-Siemens Home Appliances)</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">May 2022 – May 2025</div><div class="exp-loc">Tekirdağ, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Formally assigned to a Bavaria Government-funded LLM project with BSH Germany; developed a GenAI system to automate requirement document generation.</li>
+          <li>Independently, took a pioneering role in an AI Core Team initiative within the local R&amp;D team — organizing brainstorming sessions, drafting a year-long training curriculum, and preparing AI project proposals for the team to execute post-training.</li>
+          <li>Managed CI/CD pipelines and Agile release deliveries; implemented the ambient light feature for embedded firmware.</li>
+        </ul>
+        <span class="exp-tag">LangChain</span>
+        <span class="exp-tag">GenAI</span>
+        <span class="exp-tag">Python</span>
+        <span class="exp-tag">CI/CD</span>
+        <span class="exp-tag">Agile</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">Software Engineer, R&D</div>
+            <div class="exp-company">Sunny Electronics</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Jul 2020 – Jan 2021</div><div class="exp-loc">Istanbul, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed a WiFi remote control app for Bluetoothless Android TVs.</li>
+          <li>Managed configuration, release, and CI/CD process for Android TV software.</li>
+        </ul>
+        <span class="exp-tag">Android</span>
+        <span class="exp-tag">Java</span>
+        <span class="exp-tag">CI/CD</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">Software Engineer, R&D</div>
+            <div class="exp-company">Rigel Technology</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Oct 2019 – Mar 2020</div><div class="exp-loc">Istanbul, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed Windows device driver software for the company's VR motion control devices.</li>
+          <li>Built a control interface for device testing purposes.</li>
+        </ul>
+        <span class="exp-tag">C++</span>
+        <span class="exp-tag">Windows</span>
+        <span class="exp-tag">VR</span>
+        <span class="exp-tag">Device Driver</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">MSc Researcher — BeeDot Research Group</div>
+            <div class="exp-company">Istanbul Technical University</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Sep 2019 – Jun 2021</div><div class="exp-loc">Istanbul, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Synthesized Zinc-Doped Carbon-Based Quantum Dots via microwave-assisted methods.</li>
+          <li>Characterized samples using UV-VIS, FTIR, XPS, SEM, and TEM; findings published in <em>Diamond and Related Materials</em> (2022).</li>
+        </ul>
+        <span class="exp-tag">Quantum Dots</span>
+        <span class="exp-tag">UV-VIS / FTIR</span>
+        <span class="exp-tag">XPS</span>
+        <span class="exp-tag">SEM / TEM</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">MSc Researcher — ECC Lab Research Group</div>
+            <div class="exp-company">Istanbul Technical University</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Jul 2018 – Mar 2019</div><div class="exp-loc">Istanbul, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Contributed to the design and verification of a novel nanodevice using TCAD and LTSpice.</li>
+          <li>Implemented genetic algorithms for device parameter optimization; published at DATE 2019.</li>
+        </ul>
+        <span class="exp-tag">TCAD</span>
+        <span class="exp-tag">LTSpice</span>
+        <span class="exp-tag">Genetic Algorithms</span>
+        <span class="exp-tag">Nanoelectronics</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">System Engineer & Team Lead</div>
+            <div class="exp-company">Labirent Building Automation</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Feb 2018 – Jul 2018</div><div class="exp-loc">Istanbul, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and commissioned building automation projects — AV systems, meeting rooms, TV walls, and security systems — as turn-key solutions.</li>
+          <li>Led a team of 8 technicians; coordinated between company, clients, and contractors.</li>
+        </ul>
+        <span class="exp-tag">Building Automation</span>
+        <span class="exp-tag">Team Lead</span>
+        <span class="exp-tag">Project Management</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">Project Engineer & Team Lead</div>
+            <div class="exp-company">FOTECH</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Aug 2016 – Aug 2017</div><div class="exp-loc">Istanbul, Turkey & Kabul, Afghanistan</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed a team of 12 to complete fiber-optic network, telecom, and security camera infrastructure for the U.S. Embassy facility in Kabul.</li>
+          <li>Coordinated between government authorities and contracting companies; planned sociocultural activities to maintain team cohesion in the field.</li>
+        </ul>
+        <span class="exp-tag">Project Management</span>
+        <span class="exp-tag">Fiber Optics</span>
+        <span class="exp-tag">Team Lead</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">Junior Developer — AIESEC Internship</div>
+            <div class="exp-company">Dehenken Limited</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Sep 2012 – Feb 2013</div><div class="exp-loc">Kyoto, Japan</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed a demo app for the IoT and Android-based Derimo project.</li>
+          <li>Contributed to PIDP (Personal Identity Detection Project) using Turkish language specifications.</li>
+        </ul>
+        <span class="exp-tag">Android</span>
+        <span class="exp-tag">IoT</span>
+        <span class="exp-tag">Java</span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-left">
+            <div class="exp-title">Founder & Team Lead — HIDROGU</div>
+            <div class="exp-company">Osmangazi University</div>
+          </div>
+          <div class="exp-meta"><div class="exp-date">Sep 2011 – Aug 2012</div><div class="exp-loc">Eskişehir, Turkey</div></div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Founded and led a hydrogen-powered vehicle research team during BSc studies.</li>
+          <li>Organized technical training programs and coordinated interdisciplinary student projects.</li>
+        </ul>
+        <span class="exp-tag">Founder</span>
+        <span class="exp-tag">Renewable Energy</span>
+        <span class="exp-tag">Team Lead</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDUCATION ══════════════════════════════════ -->
+<section id="education">
+  <div class="container fade">
+    <span class="label">Education</span>
+    <h2 class="section-title">Academic background</h2>
+
+    <div class="edu-list">
+
+      <div class="edu-card phd">
+        <div>
+          <div class="edu-degree">PhD in Nanoscience &amp; Nanoengineering</div>
+          <div class="edu-school">Istanbul Technical University</div>
+          <div class="edu-detail">Specialization: Neuroscience, Neuromorphic Systems, Nanoelectronics, AI &amp; Data Science</div>
+          <div class="edu-thesis">Thesis: "Fabrication and characterization of a biocompatible nanofiber-based coating for the neuron–electrode interface to improve signal quality in primary neuron cultures."</div>
+          <span class="edu-badge">In Progress</span>
+        </div>
+        <div class="edu-date">Sep 2022 – Present<br>Istanbul, Türkiye</div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">M.Sc. in Nanoscience &amp; Nanoengineering</div>
+          <div class="edu-school">Istanbul Technical University</div>
+          <div class="edu-detail">Specialization: Nanomaterial Synthesis, Characterization, Nanosensors &amp; Nanoelectronics</div>
+          <div class="edu-thesis">Thesis: "Zinc-Doped Carbon-Based Quantum Dot Synthesis &amp; Characterization"</div>
+        </div>
+        <div class="edu-date">Feb 2018 – Jun 2021<br>Istanbul, Türkiye</div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">B.Sc. in Electrical &amp; Electronics Engineering</div>
+          <div class="edu-school">Istanbul Aydin University</div>
+          <div class="edu-detail">Focus on robotics and intelligent control systems.</div>
+          <div class="edu-thesis">Graduation project: Modeling and simulation of the ABB IRB120 industrial robot arm using Matlab &amp; Simulink.</div>
+        </div>
+        <div class="edu-date">Feb 2013 – Feb 2015<br>Istanbul, Türkiye</div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">B.Sc. in Electrical &amp; Electronics Engineering</div>
+          <div class="edu-school">Eskişehir Osmangazi University</div>
+          <div class="edu-detail">Founded HIDROGU — a hydrogen-powered vehicle research team — exploring renewable energy systems and sustainable engineering within an interdisciplinary student environment.</div>
+        </div>
+        <div class="edu-date">Sep 2008 – Jul 2012<br>Eskişehir, Türkiye</div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Associate Degree in Biomedical Device Technology</div>
+          <div class="edu-school">Istanbul University — Vocational School of Technical Sciences</div>
+        </div>
+        <div class="edu-date">Sep 2005 – Jul 2007<br>Istanbul, Türkiye</div>
+      </div>
+
+    </div>
+
+    <!-- Certifications -->
+    <div style="margin-top:48px;">
+      <span class="label">Certifications</span>
+      <div class="cert-row">
+        <div class="cert-card">
+          <div class="cert-icon">🏅</div>
+          <div>
+            <div class="cert-name">Scrum Master PSM1</div>
+            <div class="cert-issuer">Scrum.org</div>
+            <div class="cert-date">Jun 2023</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🔧</div>
+          <div>
+            <div class="cert-name">Advanced Hardware Design with Altium</div>
+            <div class="cert-issuer">Fedevel Academy</div>
+            <div class="cert-date">Jan 2022</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ PUBLICATIONS ═══════════════════════════════ -->
+<section id="publications">
+  <div class="container fade">
+    <span class="label">Research &amp; Publications</span>
+    <h2 class="section-title">Published work</h2>
+    <p class="section-sub">Peer-reviewed papers in nanomaterials, nanoelectronics, and computational systems.</p>
+
+    <div class="pub-list">
+
+      <div class="pub-card">
+        <div>
+          <div class="pub-meta">
+            <span class="pub-type">Journal Article</span>
+            <span class="pub-venue">Diamond and Related Materials, Vol. 123</span>
+            <span class="pub-year">· 2022</span>
+          </div>
+          <div class="pub-title">Triggering excitation independent fluorescence in zinc(II) incorporated carbon dots: Surface passivation of carbon dots with zinc(II) ions by microwave assisted synthesis methods</div>
+          <div class="pub-authors"><strong>O. Gençer</strong> et al.</div>
+        </div>
+        <a href="https://doi.org/10.1016/j.diamond.2022.108874" target="_blank" rel="noopener" class="pub-link">DOI ↗</a>
+      </div>
+
+      <div class="pub-card">
+        <div>
+          <div class="pub-meta">
+            <span class="pub-type">Master's Thesis</span>
+            <span class="pub-venue">Istanbul Technical University</span>
+            <span class="pub-year">· 2021</span>
+          </div>
+          <div class="pub-title">Zinc Doped Carbon Based Quantum Dot Synthesis &amp; Characterization</div>
+          <div class="pub-authors"><strong>O. Gençer</strong></div>
+        </div>
+        <a href="https://doi.org/10.13140/RG.2.2.19652.91526" target="_blank" rel="noopener" class="pub-link">DOI ↗</a>
+      </div>
+
+      <div class="pub-card">
+        <div>
+          <div class="pub-meta">
+            <span class="pub-type">Conference Paper</span>
+            <span class="pub-venue">Design, Automation &amp; Test in Europe (DATE 2019)</span>
+            <span class="pub-year">· 2019</span>
+          </div>
+          <div class="pub-title">Realization of four-terminal switching lattices: Technology development and circuit modeling</div>
+          <div class="pub-authors">S. Safaltin et al. (incl. <strong>O. Gençer</strong>)</div>
+        </div>
+        <a href="https://doi.org/10.23919/DATE.2019.8715123" target="_blank" rel="noopener" class="pub-link">DOI ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═════════════════════════════════════ -->
+<section id="skills">
+  <div class="container fade">
+    <span class="label">Skills</span>
+    <h2 class="section-title">Tech stack</h2>
+    <p class="section-sub">Spanning software engineering, AI/ML research, and nanoscience instrumentation.</p>
+
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">Nanoscience</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Quantum Dot</span>
+          <span class="skill-tag">Nanosensor</span>
+          <span class="skill-tag">Nanofabrication</span>
+          <span class="skill-tag">Nanocharacterization</span>
+          <span class="skill-tag">SEM</span>
+          <span class="skill-tag">TEM</span>
+          <span class="skill-tag">AFM</span>
+          <span class="skill-tag">RAMAN</span>
+          <span class="skill-tag">XPS</span>
+          <span class="skill-tag">FTIR</span>
+          <span class="skill-tag">Nanoelectronics</span>
+          <span class="skill-tag">Nanodevice</span>
+          <span class="skill-tag">Device Modeling</span>
+          <span class="skill-tag">Device Simulation</span>
+          <span class="skill-tag">Photolithography</span>
+          <span class="skill-tag">E-Beam Lithography</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Embedded System Design</div>
+        <div class="skill-tags">
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Matlab & Simulink</span>
+          <span class="skill-tag">VHDL</span>
+          <span class="skill-tag">FPGA</span>
+          <span class="skill-tag">Altium</span>
+          <span class="skill-tag">KiCad</span>
+          <span class="skill-tag">LTSpice</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AI &amp; Data Science</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">TensorFlow / Keras</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">LangChain / LangFlow</span>
+          <span class="skill-tag">Intel Loihi 2 (SNN)</span>
+          <span class="skill-tag">pandas / NumPy</span>
+          <span class="skill-tag">GenAI / LLM Systems</span>
+          <span class="skill-tag">TypeScript / Node.js</span>
+          <span class="skill-tag">Scientific Visualization</span>
+          <span class="skill-tag">ParaView</span>
+          <span class="skill-tag">VTK</span>
+          <span class="skill-tag">HDF5</span>
+          <span class="skill-tag">NetCDF</span>
+        </div>
+      </div>
+
+      <div class="skill-group wide">
+        <div class="skill-group-title">DevOPS &amp; AIOPS</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">CI/CD Pipelines</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Linux / Shell</span>
+        </div>
+      </div>
+
+      <div class="skill-group wide">
+        <div class="skill-group-title">Project &amp; Team Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Scrum Master (PSM1)</span>
+          <span class="skill-tag">Agile / Jira</span>
+          <span class="skill-tag">Team Leadership</span>
+          <span class="skill-tag">Cross-disciplinary Coordination</span>
+          <span class="skill-tag">Team Development & Motivation</span>
+          <span class="skill-tag">Stakeholder Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ════════════════════════════════════ -->
+<section id="contact">
+  <div class="container fade">
+    <span class="label">Contact</span>
+    <h2 class="section-title">Let's talk</h2>
+
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h3>Open to the right opportunity.</h3>
+        <p>
+          Whether it's a senior engineering role, a research collaboration, or an interesting
+          problem at the intersection of AI and physical sensing — I'm happy to have a conversation.
+          I'm based in Istanbul but have worked internationally and am open to remote or relocation.
+        </p>
+        <div class="contact-items">
+          <a href="https://linkedin.com/in/oguzgencer" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-item-icon">in</div>
+            LinkedIn
+          </a>
+          <a href="https://github.com/drader" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-item-icon">
+              <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </div>
+            GitHub
+          </a>
+          <a href="https://orcid.org/0000-0001-7460-9984" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-item-icon">
+              <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.988-1.444 3.988-3.722 0-2.206-1.547-3.722-3.988-3.722h-2.297z"/></svg>
+            </div>
+            ORCID
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="c7815079-66cb-4ee5-b735-17af842982d5">
+        <input type="hidden" name="subject" value="Portfolio Contact Form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="jane@company.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" name="subject" placeholder="Research collaboration / Job opportunity / ...">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" rows="5" placeholder="Tell me about the role, project, or question..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+          Send Message →
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <p>Designed &amp; built by <span>Oğuz Gençer</span> · 2025</p>
+    <div class="footer-links">
+      <a href="#hero">Back to top ↑</a>
+      <a href="https://github.com/drader" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/oguzgencer" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="CVogencer.pdf" download>Download CV</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.07 }
+  );
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+
+  // Project filters
+  const chips = document.querySelectorAll('.project-chip');
+  const cards = document.querySelectorAll('.project-card');
+
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const filter = chip.dataset.filter;
+    cards.forEach(card => {
+      card.classList.toggle('dimmed', filter !== 'all' && card.dataset.category !== filter);
+    });
+  }));
+</script>
+</body>
+</html>
