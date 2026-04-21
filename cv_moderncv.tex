@@ -12,12 +12,22 @@
 \usepackage{lmodern}
 \usepackage[scale=0.90, top=1.2cm, bottom=1.2cm]{geometry}
 
+% Custom project entry: name (left) + link (right), bold; status bold below
+\newcommand{\cvproject}[4]{%
+  \vspace{3pt}%
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}%
+    \textbf{#1} & \textbf{#2}\\%
+  \end{tabular*}\\[-5pt]%
+  \textbf{#3}\\[1pt]%
+  \small #4\par\vspace{1pt}%
+}
+
 % Personal info
 \name{O\u{g}uz}{Gen\c{c}er}
 \title{Electronics \& AI Engineer $|$ Nanoscience PhD Candidate}
 \address{Istanbul, Turkey}{}{}
 \email{oguzgencer@gmail.com}
-\homepage{oguzgencer.dev}
+\homepage{drader.github.io/portfolio}
 \social[linkedin]{oguzgencer}
 \social[github]{drader}
 \extrainfo{ORCID: 0000-0001-7460-9984}
@@ -43,7 +53,7 @@ Electrical \& Electronics Engineer and Nanoscience PhD Candidate working at the 
 %----- EXPERIENCE -----
 \section{Experience}
 
-\cventry{Sep 2022 -- Present}{PhD Researcher}{Istanbul Technical University}{Istanbul, Turkey}{}{
+\cventry{Sep 2022 -- Present}{PhD Candidate}{Istanbul Technical University}{Istanbul, Turkey}{}{
   \begin{itemize}
     \item Developing a novel noninvasive nanosensor for neural activity recording; fabricating biocompatible nanofiber-based coatings at the neuron-electrode interface to improve signal quality in primary neuron cultures.
     \item Specializing in neuromorphic computing, nanoelectronics, and AI/data science; using Intel Loihi~2 for SNN experiments and TCAD for device simulation.
@@ -61,7 +71,7 @@ Electrical \& Electronics Engineer and Nanoscience PhD Candidate working at the 
 \cventry{Sep 2019 -- Jun 2021}{MSc Researcher}{Istanbul Technical University -- BeeDot Research Group}{Istanbul, Turkey}{}{
   \begin{itemize}
     \item Synthesized Zinc-Doped Carbon-Based Quantum Dots via microwave-assisted methods.
-    \item Characterized samples using UV-VIS, FTIR, XPS, SEM, and TEM; findings published in \textit{Diamond and Related Materials} (2022).
+    \item Characterized using UV-VIS, FTIR, XPS, SEM, and TEM; published in \textit{Diamond and Related Materials} (2022).
   \end{itemize}
 }
 
@@ -127,27 +137,22 @@ Electrical \& Electronics Engineer and Nanoscience PhD Candidate working at the 
 
 \cvitem{2022}{O. Gen\c{c}er et al., ``Triggering excitation independent fluorescence in zinc(II) incorporated carbon dots,'' \textit{Diamond Relat. Mater.}, 123. \href{https://doi.org/10.1016/j.diamond.2022.108874}{doi:10.1016/j.diamond.2022.108874}}
 
-\cvitem{2019}{S. Safaltin et al. (incl. O. Gen\c{c}er), ``Realization of four-terminal switching lattices: Technology development and circuit modeling,'' \textit{DATE 2019}. \href{https://doi.org/10.23919/DATE.2019.8715123}{doi:10.23919/DATE.2019.8715123}}
-
 \cvitem{2021}{O. Gen\c{c}er, ``Zinc Doped Carbon Based Quantum Dot Synthesis \& Characterization'' (MSc Thesis), ITU. \href{https://doi.org/10.13140/RG.2.2.19652.91526}{doi:10.13140/RG.2.2.19652.91526}}
+
+\cvitem{2019}{S. Safaltin et al. (incl. O. Gen\c{c}er), ``Realization of four-terminal switching lattices: Technology development and circuit modeling,'' \textit{DATE 2019}. \href{https://doi.org/10.23919/DATE.2019.8715123}{doi:10.23919/DATE.2019.8715123}}
 
 %----- SELECTED PROJECTS -----
 \section{Selected Projects}
 
-\cventry{Released}{memex -- Agentic Wiki Template}{\href{https://github.com/drader/memex}{github.com/drader/memex}}{}{}{
-  Hybrid agentic wiki foundation with BM25 + vector search (RRF). TypeScript, Claude API, MCP. Foundation for papervault (arXiv), docvault (developer docs), and podvault (podcasts).
-}
+\cvproject{memex -- Agentic Wiki Template}{\href{https://github.com/drader/memex}{github.com/drader/memex}}{Released}{Hybrid agentic wiki foundation with BM25 + vector search (RRF). TypeScript, Claude API, MCP. Foundation for papervault (arXiv), docvault (developer docs), and podvault (podcasts).}
 
-\cventry{In Development}{NeuralLab Assistant}{}{}{}{
-  Hands-free voice assistant for neuron culture labs -- eliminates contamination risk by handling note-taking, timers, calculations, and protocol tracking through voice commands only.
-}
+\cvproject{NeuralLab Assistant}{}{In Development}{Hands-free voice assistant for neuron culture labs -- eliminates contamination risk by handling note-taking, timers, calculations, and protocol tracking through voice commands only.}
 
-\cventry{Completed 2014}{ABB IRB120 Robot Arm Simulation}{\href{https://github.com/drader/project-irb120}{github.com/drader/project-irb120}}{}{}{
-  Full 6-DOF dynamic simulation: DH parameters, Lagrangian dynamics, quintic trajectory generation, PID joint control. Geometry from official ABB CAD files.
-}
+\cvproject{ABB IRB120 Robot Arm Simulation}{\href{https://github.com/drader/project-irb120}{github.com/drader/project-irb120}}{Completed 2014}{Full 6-DOF dynamic simulation: DH parameters, Lagrangian dynamics, quintic trajectory generation, PID joint control. Geometry from official ABB CAD files.}
 
 %----- CERTIFICATIONS -----
 \section{Certifications}
-\cvitem{}{PSM1 Scrum Master (Scrum.org, Jun 2023) \quad Advanced Hardware Design with Altium (Fedevel Academy, Jan 2022)}
+\cvlistitem{PSM1 Scrum Master -- Scrum.org (Jun 2023)}
+\cvlistitem{Advanced Hardware Design with Altium -- Fedevel Academy (Jan 2022)}
 
 \end{document}
