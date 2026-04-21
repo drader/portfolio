@@ -1,0 +1,155 @@
+%-------------------------
+% moderncv — Banking Style — Oğuz Gençer
+% ATS score: 9/10 | Clean horizontal layout
+%-------------------------
+\documentclass[11pt, letterpaper]{moderncv}
+
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[scale=0.88, top=1.5cm, bottom=1.5cm]{geometry}
+\usepackage{multicol}
+
+% Personal info
+\name{O\u{g}uz}{Gen\c{c}er}
+\title{PhD Researcher \& Software Engineer}
+\address{Istanbul, Turkey}{}{}
+\email{oguzgencer@gmail.com}
+\homepage{oguzgencer.dev}
+\social[linkedin]{oguzgencer}
+\social[github]{drader}
+\extrainfo{ORCID: 0000-0001-7460-9984}
+
+%======================================================
+\begin{document}
+
+\makecvtitle
+\vspace{-18pt}
+
+%----- SUMMARY -----
+\section{Summary}
+PhD researcher and software engineer bridging nanoscience and AI. Research focus: neuromorphic computing and biocompatible nanosensors for neural signal recording at the neuron-electrode interface. Industry background spans GenAI systems (LangChain, LLMs), embedded firmware, and CI/CD pipelines -- from consumer electronics to Fortune~500 enterprise R\&D. 3 peer-reviewed publications. Open-source builder: the memex ecosystem (papervault, docvault, podvault). Worked in Turkey, Japan, and Afghanistan.
+
+%----- TECHNICAL SKILLS -----
+\section{Technical Skills}
+\cvitem{Nanoscience}{Quantum Dot Synthesis, Nanosensor Fabrication, SEM, TEM, AFM, Raman, XPS, FTIR, Nanoelectronics, TCAD, LTSpice, Photolithography, E-Beam Lithography}
+\cvitem{Embedded}{C, C++, Java, VHDL, FPGA, Matlab/Simulink, Altium, KiCad}
+\cvitem{AI \& Data}{Python, TensorFlow/Keras, PyTorch, LangChain, LangFlow, Intel Loihi~2 (SNN), pandas, NumPy, TypeScript/Node.js, ParaView, VTK, HDF5}
+\cvitem{DevOps}{Git/GitHub, Docker, Jenkins, CI/CD Pipelines, SQL, Linux/Shell}
+\cvitem{Management}{Scrum Master (PSM1), Agile/Jira, Team Leadership, Stakeholder Management}
+
+%----- EXPERIENCE -----
+\section{Experience}
+
+\cventry{Sep 2022 -- Present}{PhD Researcher}{Istanbul Technical University}{Istanbul, Turkey}{}{
+  \begin{itemize}
+    \item Developing a novel noninvasive nanosensor for neural activity recording; fabricating biocompatible nanofiber-based coatings at the neuron-electrode interface to improve signal quality in primary neuron cultures.
+    \item Specializing in neuromorphic computing, nanoelectronics, AI/data science, and TCAD device simulation. Using Intel Loihi~2 for SNN experiments.
+  \end{itemize}
+}
+
+\cventry{May 2022 -- May 2025}{Software Engineer, R\&D -- Cooling Division}{BSH Turkey (Bosch-Siemens Home Appliances)}{Tekirda\u{g}, Turkey}{}{
+  \begin{itemize}
+    \item Formally assigned to a Bavaria Government-funded LLM project with BSH Germany; developed a GenAI system (LangChain) to automate requirement document generation.
+    \item Pioneered an AI Core Team initiative: organized brainstorming sessions, drafted a year-long training curriculum, and prepared AI project proposals for the local R\&D team.
+    \item Managed CI/CD pipelines and Agile release deliveries; implemented ambient light feature for embedded firmware.
+  \end{itemize}
+}
+
+\cventry{Sep 2019 -- Jun 2021}{MSc Researcher}{Istanbul Technical University -- BeeDot Research Group}{Istanbul, Turkey}{}{
+  \begin{itemize}
+    \item Synthesized Zinc-Doped Carbon-Based Quantum Dots via microwave-assisted methods.
+    \item Characterized samples using UV-VIS, FTIR, XPS, SEM, and TEM; findings published in \textit{Diamond and Related Materials} (2022).
+  \end{itemize}
+}
+
+\cventry{Jul 2020 -- Jan 2021}{Software Engineer, R\&D}{Sunny Electronics}{Istanbul, Turkey}{}{
+  \begin{itemize}
+    \item Developed a WiFi remote control application for Bluetoothless Android TVs; managed CI/CD and release process.
+  \end{itemize}
+}
+
+\cventry{Oct 2019 -- Mar 2020}{Software Engineer, R\&D}{Rigel Technology}{Istanbul, Turkey}{}{
+  \begin{itemize}
+    \item Developed Windows device driver software for VR motion control devices; built a hardware control and testing interface.
+  \end{itemize}
+}
+
+\cventry{Jul 2018 -- Mar 2019}{MSc Researcher}{Istanbul Technical University -- ECC Lab}{Istanbul, Turkey}{}{
+  \begin{itemize}
+    \item Contributed to design and verification of a novel nanodevice using TCAD and LTSpice; implemented genetic algorithms for parameter optimization. Published at DATE 2019.
+  \end{itemize}
+}
+
+\cventry{Feb 2018 -- Jul 2018}{System Engineer \& Team Lead}{Labirent Building Automation}{Istanbul, Turkey}{}{
+  \begin{itemize}
+    \item Designed and commissioned building automation projects (AV, meeting rooms, security) as turn-key solutions; led a team of 8 technicians.
+  \end{itemize}
+}
+
+\cventry{Aug 2016 -- Aug 2017}{Project Engineer \& Team Lead}{FOTECH}{Istanbul, Turkey / Kabul, Afghanistan}{}{
+  \begin{itemize}
+    \item Led a team of 12 to complete fiber-optic network, telecom, and security camera infrastructure for the U.S. Embassy facility in Kabul; coordinated with government authorities and contractors.
+  \end{itemize}
+}
+
+\cventry{Sep 2012 -- Feb 2013}{Junior Developer}{Dehenken Limited -- AIESEC Internship}{Kyoto, Japan}{}{
+  \begin{itemize}
+    \item Developed a demo app for the IoT/Android-based Derimo project; contributed to a Personal Identity Detection system.
+  \end{itemize}
+}
+
+%----- EDUCATION -----
+\section{Education}
+
+\cventry{Sep 2022 -- Present}{PhD in Nanoscience \& Nanoengineering}{Istanbul Technical University}{Istanbul, Turkey}{}{
+  \textit{Thesis:} Fabrication and characterization of a biocompatible nanofiber-based coating for the neuron-electrode interface to improve signal quality in primary neuron cultures.
+}
+
+\cventry{Feb 2018 -- Jun 2021}{M.Sc. in Nanoscience \& Nanoengineering}{Istanbul Technical University}{Istanbul, Turkey}{}{
+  \textit{Thesis:} Zinc-Doped Carbon-Based Quantum Dot Synthesis \& Characterization.
+}
+
+\cventry{Feb 2013 -- Feb 2015}{B.Sc. in Electrical \& Electronics Engineering}{Istanbul Aydin University}{Istanbul, Turkey}{}{
+  \textit{Graduation Project:} Modeling and simulation of the ABB IRB120 6-DOF industrial robot arm using Matlab \& Simulink.
+}
+
+\cventry{Sep 2008 -- Jul 2012}{B.Sc. in Electrical \& Electronics Engineering}{Eskisehir Osmangazi University}{Eskisehir, Turkey}{}{
+  Founded HIDROGU -- a hydrogen-powered vehicle research team exploring renewable energy systems.
+}
+
+\cventry{Sep 2005 -- Jul 2007}{Associate Degree in Biomedical Device Technology}{Istanbul University -- Vocational School of Technical Sciences}{Istanbul, Turkey}{}{}
+
+%----- PUBLICATIONS -----
+\section{Publications}
+
+\cvitem{2022}{O. Gen\c{c}er et al., ``Triggering excitation independent fluorescence in zinc(II) incorporated carbon dots,'' \textit{Diamond and Related Materials}, Vol.~123. \newline \href{https://doi.org/10.1016/j.diamond.2022.108874}{doi:10.1016/j.diamond.2022.108874}}
+
+\cvitem{2019}{S. Safaltin et al. (incl. O. Gen\c{c}er), ``Realization of four-terminal switching lattices: Technology development and circuit modeling,'' \textit{DATE 2019 Conference}. \newline \href{https://doi.org/10.23919/DATE.2019.8715123}{doi:10.23919/DATE.2019.8715123}}
+
+\cvitem{2021}{O. Gen\c{c}er, ``Zinc Doped Carbon Based Quantum Dot Synthesis \& Characterization'' (MSc Thesis), Istanbul Technical University. \newline \href{https://doi.org/10.13140/RG.2.2.19652.91526}{doi:10.13140/RG.2.2.19652.91526}}
+
+%----- SELECTED PROJECTS -----
+\section{Selected Projects}
+
+\cventry{Released}{memex -- Agentic Wiki Template}{\href{https://github.com/drader/memex}{github.com/drader/memex}}{}{}{
+  Hybrid agentic wiki foundation with BM25 + vector search (RRF). TypeScript, Claude API, MCP. Foundation for papervault (arXiv research), docvault (developer docs), and podvault (podcast transcripts).
+}
+
+\cventry{In Development}{NeuralLab Assistant}{}{}{}{
+  Hands-free voice assistant for neuron culture labs -- eliminates contamination risk by handling note-taking, timers, calculations, and protocol tracking through voice commands only.
+}
+
+\cventry{Completed 2014}{ABB IRB120 Robot Arm Simulation}{\href{https://github.com/drader/project-irb120}{github.com/drader/project-irb120}}{}{}{
+  Full 6-DOF dynamic simulation: DH parameters, Lagrangian dynamics, quintic trajectory generation, PID joint control. Geometry from official ABB CAD files.
+}
+
+%----- CERTIFICATIONS -----
+\section{Certifications}
+\cvitem{Jun 2023}{Professional Scrum Master (PSM1) -- Scrum.org}
+\cvitem{Jan 2022}{Advanced Hardware Design with Altium -- Fedevel Academy}
+
+\end{document}
