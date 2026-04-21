@@ -12,14 +12,14 @@
 \usepackage{lmodern}
 \usepackage[scale=0.90, top=1.2cm, bottom=1.2cm]{geometry}
 
-% Custom project entry: name (left) + link (right), bold; status bold below
-\newcommand{\cvproject}[4]{%
+% Custom project entry: "Name - link" (left bold) | Status (right bold)
+% #1=name, #2=link url, #3=link text, #4=status, #5=description
+\newcommand{\cvproject}[5]{%
   \vspace{3pt}%
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}%
-    \textbf{#1} & \textbf{#2}\\%
-  \end{tabular*}\\[-5pt]%
-  \textbf{#3}\\[1pt]%
-  \small #4\par\vspace{1pt}%
+    \textbf{#1\ifx&#2&\else{} -- \href{#2}{#3}\fi} & \textbf{#4}\\%
+  \end{tabular*}\\[-3pt]%
+  \small #5\par\vspace{1pt}%
 }
 
 % Personal info
@@ -144,11 +144,11 @@ Electrical \& Electronics Engineer and Nanoscience PhD Candidate working at the 
 %----- SELECTED PROJECTS -----
 \section{Selected Projects}
 
-\cvproject{memex -- Agentic Wiki Template}{\href{https://github.com/drader/memex}{github.com/drader/memex}}{Released}{Hybrid agentic wiki foundation with BM25 + vector search (RRF). TypeScript, Claude API, MCP. Foundation for papervault (arXiv), docvault (developer docs), and podvault (podcasts).}
+\cvproject{memex -- Agentic Wiki Template}{https://github.com/drader/memex}{github.com/drader/memex}{Released}{Hybrid agentic wiki foundation with BM25 + vector search (RRF). TypeScript, Claude API, MCP. Foundation for papervault (arXiv), docvault (developer docs), and podvault (podcasts).}
 
-\cvproject{NeuralLab Assistant}{}{In Development}{Hands-free voice assistant for neuron culture labs -- eliminates contamination risk by handling note-taking, timers, calculations, and protocol tracking through voice commands only.}
+\cvproject{NeuralLab Assistant}{}{}{In Development}{Hands-free voice assistant for neuron culture labs -- eliminates contamination risk by handling note-taking, timers, calculations, and protocol tracking through voice commands only.}
 
-\cvproject{ABB IRB120 Robot Arm Simulation}{\href{https://github.com/drader/project-irb120}{github.com/drader/project-irb120}}{Completed 2014}{Full 6-DOF dynamic simulation: DH parameters, Lagrangian dynamics, quintic trajectory generation, PID joint control. Geometry from official ABB CAD files.}
+\cvproject{ABB IRB120 Robot Arm Simulation}{https://github.com/drader/project-irb120}{github.com/drader/project-irb120}{Completed 2014}{Full 6-DOF dynamic simulation: DH parameters, Lagrangian dynamics, quintic trajectory generation, PID joint control. Geometry from official ABB CAD files.}
 
 %----- CERTIFICATIONS -----
 \section{Certifications}
