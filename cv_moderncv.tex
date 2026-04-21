@@ -12,6 +12,16 @@
 \usepackage{lmodern}
 \usepackage[scale=0.90, top=1.2cm, bottom=1.2cm]{geometry}
 
+% Experience entry: Company -- Title (left bold) | Location -- Date (right italic)
+% #1=company-title, #2=location, #3=date, #4=description
+\newcommand{\cvexp}[4]{%
+  \vspace{3pt}\par\noindent
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \textbf{#1} & \small\textit{#2 \textendash\ #3}\\
+  \end{tabular*}\vspace{-4pt}
+  #4\vspace{1pt}%
+}
+
 % Custom project entry: name+link (left bold) | status (right bold)
 % #1=full left content (name + optional link), #2=status, #3=description
 \newcommand{\cvproject}[3]{%
@@ -53,14 +63,14 @@ Electrical \& Electronics Engineer and Nanoscience PhD Candidate working at the 
 %----- EXPERIENCE -----
 \section{Experience}
 
-\cventry{Sep 2022 -- Present}{Istanbul Technical University -- PhD Candidate}{}{Istanbul, Turkey}{}{
+\cvexp{Istanbul Technical University -- PhD Candidate}{Istanbul, Turkey}{Sep 2022 -- Present}{
   \begin{itemize}
     \item Developing a novel noninvasive nanosensor for neural activity recording; fabricating biocompatible nanofiber-based coatings at the neuron-electrode interface to improve signal quality in primary neuron cultures.
     \item Specializing in neuromorphic computing, nanoelectronics, and AI/data science; using Intel Loihi~2 for SNN experiments and TCAD for device simulation.
   \end{itemize}
 }
 
-\cventry{May 2022 -- May 2025}{BSH Turkey (Bosch-Siemens Home Appliances) -- Software Engineer, R\&D}{}{Tekirda\u{g}, Turkey}{}{
+\cvexp{BSH Turkey (Bosch-Siemens Home Appliances) -- Software Engineer, R\&D}{Tekirda\u{g}, Turkey}{May 2022 -- May 2025}{
   \begin{itemize}
     \item Formally assigned to a Bavaria Government-funded LLM project with BSH Germany; developed a GenAI system (LangChain) to automate requirement document generation.
     \item Pioneered an AI Core Team initiative: organized brainstorming sessions, drafted a year-long training curriculum, and prepared AI project proposals for the local R\&D team.
@@ -68,44 +78,44 @@ Electrical \& Electronics Engineer and Nanoscience PhD Candidate working at the 
   \end{itemize}
 }
 
-\cventry{Jul 2020 -- Jan 2021}{Sunny Electronics -- Software Engineer, R\&D}{}{Istanbul, Turkey}{}{
+\cvexp{Sunny Electronics -- Software Engineer, R\&D}{Istanbul, Turkey}{Jul 2020 -- Jan 2021}{
   \begin{itemize}
     \item Developed WiFi remote control software for Android TV platforms; managed release and CI/CD pipeline.
   \end{itemize}
 }
 
-\cventry{Oct 2019 -- Mar 2020}{Rigel Technology -- Software Engineer, R\&D}{}{Istanbul, Turkey}{}{
+\cvexp{Rigel Technology -- Software Engineer, R\&D}{Istanbul, Turkey}{Oct 2019 -- Mar 2020}{
   \begin{itemize}
     \item Developed Windows device driver software for VR motion control devices; built a hardware control and testing interface.
   \end{itemize}
 }
 
-\cventry{Sep 2019 -- Jun 2021}{Istanbul Technical University, BeeDot Research Group -- MSc Researcher}{}{Istanbul, Turkey}{}{
+\cvexp{Istanbul Technical University, BeeDot Research Group -- MSc Researcher}{Istanbul, Turkey}{Sep 2019 -- Jun 2021}{
   \begin{itemize}
     \item Synthesized Zinc-Doped Carbon-Based Quantum Dots via microwave-assisted methods.
     \item Characterized using UV-VIS, FTIR, XPS, SEM, and TEM; published in \textit{Diamond and Related Materials} (2022).
   \end{itemize}
 }
 
-\cventry{Jul 2018 -- Mar 2019}{Istanbul Technical University, ECC Lab -- MSc Researcher}{}{Istanbul, Turkey}{}{
+\cvexp{Istanbul Technical University, ECC Lab -- MSc Researcher}{Istanbul, Turkey}{Jul 2018 -- Mar 2019}{
   \begin{itemize}
     \item Contributed to design and verification of a novel nanodevice using TCAD and LTSpice; implemented genetic algorithms for parameter optimization. Published at DATE 2019.
   \end{itemize}
 }
 
-\cventry{Feb 2018 -- Jul 2018}{Labirent Building Automation -- System Engineer \& Team Lead}{}{Istanbul, Turkey}{}{
+\cvexp{Labirent Building Automation -- System Engineer \& Team Lead}{Istanbul, Turkey}{Feb 2018 -- Jul 2018}{
   \begin{itemize}
     \item Designed and commissioned turn-key building automation projects (AV, security, meeting rooms); led a team of 8 technicians.
   \end{itemize}
 }
 
-\cventry{Aug 2016 -- Aug 2017}{FOTECH -- Project Engineer \& Team Lead}{}{Istanbul, Turkey / Kabul, Afghanistan}{}{
+\cvexp{FOTECH -- Project Engineer \& Team Lead}{Istanbul, Turkey / Kabul, Afghanistan}{Aug 2016 -- Aug 2017}{
   \begin{itemize}
     \item Led 12-person team delivering fiber-optic, telecom, and security camera infrastructure for the U.S. Embassy in Kabul; coordinated with government authorities and contractors.
   \end{itemize}
 }
 
-\cventry{Sep 2012 -- Feb 2013}{Dehenken Limited, AIESEC Internship -- Junior Developer}{}{Kyoto, Japan}{}{
+\cvexp{Dehenken Limited, AIESEC Internship -- Junior Developer}{Kyoto, Japan}{Sep 2012 -- Feb 2013}{
   \begin{itemize}
     \item Developed IoT/Android demo app (Derimo project); contributed to a Personal Identity Detection system.
   \end{itemize}
