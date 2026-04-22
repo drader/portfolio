@@ -33,6 +33,9 @@ jobs:
           latexmk_use_xelatex: false
           latexmk_shell_escape: false
 
+      - name: Show LaTeX log
+        run: cat cv/cv_moderncv.log | grep -i "photo\|picture\|overfull\|cannot\|Error\|undefined" || echo "no matches"
+
       - name: Commit compiled PDF
         run: |
           git config user.name "github-actions[bot]"
