@@ -1,9 +1,9 @@
-name: Compile LaTeX CVs
+name: Compile LaTeX CV
 
 on:
   push:
     paths:
-      - '*.tex'
+      - 'cv/*.tex'
   workflow_dispatch:
 
 permissions:
@@ -19,31 +19,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compile cv_jakes.tex
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: cv_jakes.tex
-          latexmk_use_xelatex: false
-          latexmk_shell_escape: false
-
-      - name: Compile cv_visual.tex
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: cv_visual.tex
-          latexmk_use_xelatex: false
-          latexmk_shell_escape: false
-
       - name: Compile cv_moderncv.tex
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: cv_moderncv.tex
+          root_file: cv/cv_moderncv.tex
           latexmk_use_xelatex: false
           latexmk_shell_escape: false
 
-      - name: Commit compiled PDFs
+      - name: Commit compiled PDF
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cv_jakes.pdf cv_visual.pdf cv_moderncv.pdf
-          git diff --staged --quiet || git commit -m "ci: compile LaTeX CVs to PDF"
+          git add cv/cv_moderncv.pdf
+          git diff --staged --quiet || git commit -m "ci: compile cv_moderncv.tex to PDF"
           git push
