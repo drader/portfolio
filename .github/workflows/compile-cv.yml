@@ -36,4 +36,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add cv/cv_moderncv.pdf
           git diff --staged --quiet || git commit -m "ci: compile cv_moderncv.tex to PDF"
+          git pull --rebase
           git push
