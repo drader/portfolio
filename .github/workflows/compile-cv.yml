@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Restore photo from secret
-        run: echo "${{ secrets.CV_PHOTO }}" | base64 -d > cv/photo.jpg
+        run: echo "${{ secrets.CV_PHOTO }}" | base64 -d > photo.jpg
 
       - name: Compile cv_moderncv.tex
         uses: xu-cheng/latex-action@v3
