@@ -30,7 +30,6 @@ jobs:
 
       - name: Commit compiled PDF
         run: |
-          echo "PWD=$(pwd) GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
           git config --global --add safe.directory '*'
           cd "${GITHUB_WORKSPACE:-.}"
           git config user.name "github-actions[bot]"
