@@ -11,6 +11,9 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[scale=0.90, top=1.2cm, bottom=1.2cm]{geometry}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
 
 % Experience entry: Company -- Title (left bold) | Location -- Date (right italic)
 % #1=company-title, #2=location, #3=date, #4=description
@@ -41,10 +44,14 @@
 \social[linkedin]{oguzgencer}
 \social[github]{drader}
 \extrainfo{ORCID: 0000-0001-7460-9984}
-\photo[70pt][0pt]{photo}
 
 %======================================================
 \begin{document}
+
+% Photo overlaid in top-right corner, aligned with the header
+\begin{textblock}{25}(168, 5)
+  \includegraphics[height=25mm]{photo}
+\end{textblock}
 
 \makecvtitle
 \vspace{-18pt}
