@@ -14,26 +14,26 @@
 \usepackage{etoolbox}
 
 % Reduce vertical space before each section heading to compensate for added item spacing
-\AtBeginDocument{\pretocmd{\section}{\vspace{-4pt}}{}{}}
+\AtBeginDocument{\pretocmd{\section}{\vspace{-9pt}}{}{}}
 
 % Experience entry: Company -- Title (left bold) | Location -- Date (right italic)
 % #1=company-title, #2=location, #3=date, #4=description
 \newcommand{\cvexp}[4]{%
-  \vspace{1pt}\par\noindent
+  \vspace{-2pt}\par\noindent
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
     \textbf{#1} & \small\textit{#2 \textendash\ #3}\\
   \end{tabular*}\vspace{3pt}
-  #4\vspace{-2pt}%
+  #4\vspace{5pt}%
 }
 
 % Custom project entry: name+link (left bold) | status (right bold)
 % #1=full left content (name + optional link), #2=status, #3=description
 \newcommand{\cvproject}[3]{%
-  \vspace{1pt}%
+  \vspace{-2pt}%
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}%
     \textbf{#1} & \textbf{#2}\\%
   \end{tabular*}\\[2pt]%
-  \small #3\par\vspace{-2pt}%
+  \small #3\par\vspace{5pt}%
 }
 
 % Personal info
