@@ -19,23 +19,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Restore photo from secret
-        run: echo "${{ secrets.CV_PHOTO }}" | base64 -d > cv/photo.jpg
-
-      - name: Debug photo
-        run: ls -lh cv/photo.jpg && file cv/photo.jpg && identify cv/photo.jpg 2>/dev/null || echo "identify not available"
-
       - name: Compile cv_moderncv.tex
         uses: xu-cheng/latex-action@v3
+        env:
+          CV_PHOTO_B64: ${{ secrets.CV_PHOTO }}
         with:
           root_file: cv/cv_moderncv.tex
           work_in_root_file_dir: true
           latexmk_use_xelatex: false
           latexmk_shell_escape: false
-          pre_compile: "echo '=== CWD ===' && pwd && echo '=== ls CWD ===' && ls -la && echo '=== photo in CWD? ===' && ls -lh photo.jpg 2>/dev/null || echo 'NO PHOTO IN CWD' && echo '=== /github/workspace/cv/ ===' && ls -lh /github/workspace/cv/photo.jpg 2>/dev/null || echo 'NO PHOTO AT /github/workspace/cv/'"
-
-      - name: Show LaTeX log
-        run: cat cv/cv_moderncv.log | grep -i "photo\|picture\|overfull\|cannot\|Error\|undefined" || echo "no matches"
+          pre_compile: "printf '%s' \"$CV_PHOTO_B64\" | base64 -d > cv/photo.jpg && echo 'Photo written:' && ls -lh cv/photo.jpg"
 
       - name: Commit compiled PDF
         run: |
