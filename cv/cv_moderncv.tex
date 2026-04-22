@@ -11,9 +11,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[scale=0.90, top=1.2cm, bottom=1.2cm]{geometry}
-\usepackage[absolute,overlay]{textpos}
-\setlength{\TPHorizModule}{1mm}
-\setlength{\TPVertModule}{1mm}
 
 % Experience entry: Company -- Title (left bold) | Location -- Date (right italic)
 % #1=company-title, #2=location, #3=date, #4=description
@@ -48,12 +45,16 @@
 %======================================================
 \begin{document}
 
-% Photo overlaid in top-right corner, aligned with the header
-\begin{textblock}{25}(168, 5)
-  \includegraphics[height=25mm]{photo}
-\end{textblock}
-
-\makecvtitle
+\noindent
+\begin{minipage}[t]{0.72\textwidth}
+  \setlength{\textwidth}{\linewidth}
+  \makecvtitle
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.24\textwidth}
+  \vspace{4pt}
+  \raggedleft\includegraphics[height=32mm]{photo}
+\end{minipage}
 \vspace{-18pt}
 
 %----- SUMMARY -----
